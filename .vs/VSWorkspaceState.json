@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\types",
+    "\\server_os",
+    "\\server_os\\Hubs",
+    "\\server_os\\obj",
+    "\\server_os\\Properties",
+    "\\server_os\\Services",
+    "\\server_os\\wwwroot"
+  ],
+  "SelectedNode": "\\server_os\\Hubs\\SystemHub.cs",
+  "PreviewInSolutionExplorer": false
+}
