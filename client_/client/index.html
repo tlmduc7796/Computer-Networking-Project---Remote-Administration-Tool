@@ -1,18 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <title>Remote Control Client</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET_WATCH // SERVER TERMINAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+<body class="bg-cyber-grid scanlines">
+    <div class="relative z-10 container mx-auto px-4 py-6 max-w-7xl">
+
+        <header class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-black/80 p-4 border-b border-[#FCEE0A]/30 backdrop-blur-sm">
+            <div class="flex items-center gap-4">
+                <div class="p-2 border border-[#FCEE0A] bg-black">
+                    <i data-lucide="server" class="w-8 h-8 text-[#FCEE0A] animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-display font-black text-white tracking-tighter leading-none glitch" data-text="NET_WATCH">
+                        NET_<span class="text-[#FCEE0A]">WATCH</span>
+                    </h1>
+                    <p class="text-[#00F0FF] text-xs tracking-[0.3em] mt-1 font-mono">SERVER_TERMINAL // V.1.0</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 text-xs font-mono">
+                <div class="px-4 py-2 bg-[#111] border border-[#00F0FF]/30 flex items-center gap-2">
+                    <span class="text-gray-500">HOST_IP:</span>
+                    <span class="text-[#00F0FF] font-bold tracking-wider" id="server-ip">SEARCHING...</span>
+                </div>
+                <div class="px-4 py-2 bg-[#111] border border-[#FF003C]/30 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#FF003C]" id="status-indicator"></span>
+                    <span class="text-[#FF003C] font-bold" id="server-status">OFFLINE</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            
+            <div class="cyber-card">
+                <div class="deco-corner-tr"></div>
+                <div class="deco-corner-bl"></div>
+                <div class="cyber-card-inner">
+                    <div class="cyber-card-header">
+                        <h3 class="text-[#FCEE0A] font-display font-bold flex items-center gap-2">
+                            <i data-lucide="settings" class="w-5 h-5"></i> PROTOCOLS
+                        </h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-[#111] p-3 border border-gray-800">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="wifi" class="w-5 h-5 text-[#00F0FF]"></i>
+                                <span class="text-gray-300 text-sm">SIGNAL RECEPTION</span>
+                            </div>
+                            <button id="connection-toggle" class="relative inline-flex h-6 w-12 items-center rounded-none bg-gray-700 transition-colors border border-gray-600">
+                                <span id="toggle-slider" class="inline-block h-4 w-4 transform bg-[#FCEE0A] transition-transform translate-x-1"></span>
+                            </button>
+                        </div>
+
+                        <button id="disconnect-all-btn" class="cyber-btn cyber-btn-danger w-full justify-center">
+                            <i data-lucide="skull" class="w-5 h-5"></i> KILL SWITCH
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="deco-corner-tr"></div>
+                <div class="cyber-card-inner">
+                    <div class="cyber-card-header">
+                        <h3 class="text-[#FCEE0A] font-display font-bold flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-5 h-5"></i> CPU_LOAD
+                        </h3>
+                        <span class="text-[#FCEE0A] text-2xl font-bold font-mono" id="cpu-percentage">0%</span>
+                    </div>
+                    <div class="relative w-full bg-[#111] h-8 border border-gray-800 mt-4 overflow-hidden">
+                        <div class="absolute inset-0" style="background-image: linear-gradient(to right, #333 1px, transparent 1px); background-size: 10px 100%;"></div>
+                        <div id="cpu-bar" class="h-full bg-[#FCEE0A] transition-all duration-300 opacity-80" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="deco-corner-tr"></div>
+                <div class="cyber-card-inner">
+                    <div class="cyber-card-header">
+                        <h3 class="text-[#00F0FF] font-display font-bold flex items-center gap-2">
+                            <i data-lucide="memory-stick" class="w-5 h-5"></i> MEMORY
+                        </h3>
+                        <div class="text-right">
+                            <div class="text-[#00F0FF] text-2xl font-bold font-mono" id="ram-percentage">0%</div>
+                            <div class="text-xs text-gray-500" id="ram-details">0 / 0 GB</div>
+                        </div>
+                    </div>
+                    <div class="relative w-full bg-[#111] h-8 border border-gray-800 mt-2 overflow-hidden">
+                        <div class="absolute inset-0" style="background-image: linear-gradient(to right, #333 1px, transparent 1px); background-size: 10px 100%;"></div>
+                        <div id="ram-bar" class="h-full bg-[#00F0FF] transition-all duration-300 opacity-80" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <div class="cyber-card h-[500px] flex flex-col">
+                <div class="deco-corner-tr"></div>
+                <div class="deco-corner-bl"></div>
+                <div class="cyber-card-inner flex flex-col h-full">
+                    <div class="cyber-card-header">
+                        <h3 class="text-[#FCEE0A] font-display font-bold flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4"></i> TERMINAL_LOG
+                        </h3>
+                        <button id="clear-logs-btn" class="text-xs text-gray-500 hover:text-[#FCEE0A] font-mono border border-gray-700 px-2 py-1">[PURGE_DATA]</button>
+                    </div>
+                    <div id="log-container" class="flex-1 overflow-y-auto font-mono text-sm space-y-1 p-2 bg-black/50 border border-gray-800 custom-scrollbar">
+                        </div>
+                </div>
+            </div>
+
+            <div class="cyber-card h-[500px] flex flex-col">
+                <div class="deco-corner-tr"></div>
+                <div class="deco-corner-bl"></div>
+                <div class="cyber-card-inner flex flex-col h-full">
+                    <div class="cyber-card-header">
+                        <h3 class="text-[#00F0FF] font-display font-bold flex items-center gap-2">
+                            <i data-lucide="network" class="w-4 h-4"></i> NET_NODES
+                            <span class="ml-2 text-xs bg-[#00F0FF]/10 text-[#00F0FF] px-2 py-0.5 rounded" id="active-connections">0</span>
+                        </h3>
+                    </div>
+                    
+                    <div class="flex-1 overflow-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-[#00F0FF] text-xs uppercase bg-[#00F0FF]/10 sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-3 font-mono">UNIT_ID</th>
+                                    <th class="px-4 py-3 font-mono">IP_ADDR</th>
+                                    <th class="px-4 py-3 font-mono text-right">STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-tbody" class="divide-y divide-gray-800 font-mono">
+                                <tr><td colspan="3" class="text-center py-10 text-gray-600 italic">SCANNING FOR SIGNALS...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('server-ip').innerText = window.location.hostname;
+
+        let isSystemLocked = false;
+        let myConnectionId = "";
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/systemHub")
+            .withAutomaticReconnect()
+            .build();
+
+        connection.on("ReceiveLog", (msg) => {
+            let level = "INFO";
+            if (msg.includes("STOPPED") || msg.includes("BLOCKED") || msg.includes("Disconnected")) level = "WARN";
+            if (msg.includes("New connection")) level = "NET";
+            if (msg.includes("LOCKED")) level = "SEC";
+            addLog(level, msg);
+        });
+
+        connection.on("UpdateClientList", (listIDs) => {
+            document.getElementById("active-connections").innerText = listIDs.length;
+            updateClientTableReal(listIDs);
+        });
+
+        connection.on("UpdateSystemStatus", (isLocked) => {
+            isSystemLocked = isLocked;
+            updateToggleUI(isLocked);
+        });
+
+        connection.on("ReceiveSystemStats", (stats) => {
+            const cpuVal = stats.cpu + "%";
+            document.getElementById('cpu-percentage').innerText = cpuVal;
+            document.getElementById('cpu-bar').style.width = cpuVal;
+
+            const ramPercent = Math.round((stats.ramUsed / stats.ramTotal) * 100);
+            document.getElementById('ram-percentage').innerText = ramPercent + "%";
+            document.getElementById('ram-bar').style.width = ramPercent + "%";
+
+            const usedGB = (stats.ramUsed / 1024).toFixed(1);
+            const totalGB = (stats.ramTotal / 1024).toFixed(0);
+            document.getElementById('ram-details').innerText = `${usedGB} / ${totalGB} GB`;
+        });
+
+        connection.on("ReceiveScreenshot", () => addLog("DATA", "📸 Received Screenshot data"));
+        connection.on("ReceiveProcessList", () => addLog("DATA", "📋 Process List generated"));
+
+        const toggleBtn = document.getElementById('connection-toggle');
+        const toggleSlider = document.getElementById('toggle-slider');
+
+        function updateToggleUI(locked) {
+            if (!locked) {
+                // Style cho trạng thái MỞ (Màu vàng/xám)
+                toggleBtn.classList.replace('bg-[#FCEE0A]', 'bg-gray-700');
+                if(!toggleBtn.classList.contains('bg-gray-700')) toggleBtn.classList.add('bg-gray-700');
+                toggleSlider.classList.remove('translate-x-7', 'bg-black');
+                toggleSlider.classList.add('translate-x-1', 'bg-[#FCEE0A]');
+            } else {
+                // Style cho trạng thái KHÓA (Màu vàng sáng)
+                toggleBtn.classList.replace('bg-gray-700', 'bg-[#FCEE0A]');
+                toggleSlider.classList.remove('translate-x-1', 'bg-[#FCEE0A]');
+                toggleSlider.classList.add('translate-x-7', 'bg-black');
+            }
+        }
+
+        toggleBtn.addEventListener('click', async () => {
+            const newState = !isSystemLocked;
+            try { await connection.invoke("ToggleSystemLock", newState); }
+            catch (err) { addLog("ERR", "Lỗi gửi lệnh khóa: " + err.toString()); }
+        });
+
+        function addLog(level, message) {
+            const logContainer = document.getElementById('log-container');
+            const time = new Date().toLocaleTimeString();
+            // Cập nhật màu log cho đúng theme
+            const colors = { 
+                'INFO': 'text-[#00F0FF]', 
+                'WARN': 'text-[#FCEE0A]', 
+                'ERR': 'text-[#FF003C]', 
+                'CMD': 'text-white', 
+                'NET': 'text-purple-400', 
+                'SEC': 'text-[#FF003C] animate-pulse' 
+            };
+            const div = document.createElement('div');
+            div.className = 'border-l-2 border-gray-800 pl-2 hover:bg-white/5 transition-colors';
+            div.innerHTML = `<span class="text-gray-600">[${time}]</span> <span class="${colors[level] || 'text-white'} font-bold w-12 inline-block">${level}</span> ${message}`;
+            logContainer.appendChild(div);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        function updateClientTableReal(clients) {
+            const tbody = document.getElementById("clients-tbody");
+            if (!tbody) return;
+            tbody.innerHTML = "";
+
+            if (!clients || clients.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="text-center py-10 text-gray-600 italic">NO SIGNALS DETECTED...</td></tr>`;
+                return;
+            }
+
+            clients.forEach(client => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-[#00F0FF]/10 transition-colors border-b border-gray-800";
+                const isMe = (client.connectionId === myConnectionId);
+                const displayIP = client.ipAddress || "Unknown";
+
+                tr.innerHTML = `
+                        <td class="px-4 py-3 flex items-center gap-2 text-[#FCEE0A]">
+                            <i data-lucide="monitor" class="w-4 h-4"></i>
+                            ${client.name} ${isMe ? "(HOST)" : ""}
+                        </td>
+                        <td class="px-4 py-3 text-gray-400">${displayIP}</td>
+                        <td class="px-4 py-3 text-right">
+                            <span class="text-[#00F0FF] text-xs border border-[#00F0FF] px-2 py-0.5">
+                                ONLINE
+                            </span>
+                        </td>
+                    `;
+                tbody.appendChild(tr);
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        async function startApp() {
+            try {
+                await connection.start();
+                myConnectionId = connection.connectionId;
+                const indicator = document.getElementById("status-indicator");
+                const statusText = document.getElementById("server-status");
+                
+                indicator.classList.remove("bg-[#FF003C]");
+                indicator.classList.add("bg-[#00F0FF]", "animate-pulse");
+                statusText.innerText = "ONLINE";
+                statusText.classList.replace("text-[#FF003C]", "text-[#00F0FF]");
+                
+                addLog("INFO", "NET_WATCH SERVER INITIALIZED. ID: " + myConnectionId);
+            } catch (err) {
+                console.error(err);
+                setTimeout(startApp, 5000);
+            }
+        }
+
+        document.getElementById('clear-logs-btn').addEventListener('click', () => {
+            document.getElementById('log-container').innerHTML = '';
+        });
+
+        document.getElementById('disconnect-all-btn').addEventListener('click', async () => {
+            if (confirm("EXECUTE EMERGENCY PROTOCOL: KILL SERVER?")) {
+                try { await connection.invoke("EmergencyShutdown"); } catch (e) { console.error(e); }
+            }
+        });
+
+        startApp();
+    </script>
 </body>
 </html>
