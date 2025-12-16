@@ -1,38 +1,44 @@
-﻿import { Terminal, ShieldCheck, Activity } from 'lucide-react';
+﻿import { Terminal, ShieldCheck, Activity, Wifi, WifiOff } from 'lucide-react';
 import PowerControls from './components/PowerControls';
 import ProcessManager from './components/ProcessManager';
 import ScreenshotCard from './components/ScreenshotCard';
 import KeyloggerCard from './components/KeyloggerCard';
-import { AgentSelector } from './components/AgentSelector';
+// SỬA LỖI 1: Bỏ dấu ngoặc nhọn { } vì AgentSelector export default
+import AgentSelector from './components/AgentSelector';
 import { useSocket } from './contexts/SocketContext';
-// 1. IMPORT WEBCAM CARD Ở ĐÂY
 import WebcamCard from './components/WebcamCard';
 
 function App() {
-    const { isSystemLocked, isConnected } = useSocket();
+    // SỬA LỖI 2: Chỉ lấy isConnected để dùng, bỏ isSystemLocked để tránh lỗi unused
+    const { isConnected, selectAgent } = useSocket();
 
     return (
         <div className="min-h-screen bg-black bg-grid-pattern scan-line text-green-500 font-mono selection:bg-green-900 selection:text-white flex flex-col">
 
-            {/* --- HEADER (GIỮ NGUYÊN) --- */}
+            {/* --- HEADER --- */}
             <header className="border-b border-green-500/30 bg-black/80 backdrop-blur-md sticky top-0 z-50 shadow-[0_5px_20px_rgba(0,0,0,0.5)]">
                 <div className="container mx-auto px-4 py-4 lg:px-6 lg:py-6">
                     <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
                         {/* CỤM LOGO & TIÊU ĐỀ */}
                         <div className="flex items-center gap-5">
-                            <div className="p-4 border-2 border-green-500 rounded-lg bg-green-900/20 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                <Terminal className="w-10 h-10 text-green-400 animate-pulse" />
+                            <div className={`p-4 border-2 rounded-lg bg-green-900/20 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-colors duration-500 ${isConnected ? 'border-green-500' : 'border-red-500'}`}>
+                                <Terminal className={`w-10 h-10 animate-pulse ${isConnected ? 'text-green-400' : 'text-red-500'}`} />
                             </div>
                             <div className="flex flex-col">
                                 <h1 className="text-4xl md:text-5xl font-black text-white text-shadow-neon tracking-tighter leading-none">
-                                    REMOTE<span className="text-green-500">CONTROL</span>
+                                    REMOTE<span className={isConnected ? "text-green-500" : "text-red-500"}>CONTROL</span>
                                 </h1>
                                 <div className="flex items-center gap-3 mt-2">
-                                    <span className="bg-green-500/10 text-green-400 text-[10px] px-2 py-0.5 rounded border border-green-500/30 font-bold">
+                                    <span className={`text-[10px] px-2 py-0.5 rounded border font-bold ${isConnected ? 'bg-green-500/10 text-green-400 border-green-500/30' : 'bg-red-500/10 text-red-400 border-red-500/30'}`}>
                                         v3.0-STABLE
                                     </span>
-                                    <p className="hidden sm:block text-xs text-gray-500 font-mono tracking-[0.3em] uppercase">
-                                        SECURE UPLINK ESTABLISHED
+                                    {/* SỬA LỖI 3: Hiển thị trạng thái kết nối thực tế */}
+                                    <p className={`hidden sm:flex items-center gap-2 text-xs font-mono tracking-[0.3em] uppercase ${isConnected ? 'text-gray-500' : 'text-red-500 animate-pulse'}`}>
+                                        {isConnected ? (
+                                            <> <Wifi size={12} /> SECURE UPLINK ESTABLISHED </>
+                                        ) : (
+                                            <> <WifiOff size={12} /> CONNECTION LOST - RECONNECTING... </>
+                                        )}
                                     </p>
                                 </div>
                             </div>
@@ -41,7 +47,7 @@ function App() {
                         {/* AGENT SELECTOR */}
                         <div className="w-full lg:flex-1">
                             <div className="p-1.5 border border-green-500/30 rounded-xl bg-black/60 backdrop-blur shadow-inner w-full">
-                                <AgentSelector />
+                                <AgentSelector onSelectAgent={selectAgent} />
                             </div>
                         </div>
                     </div>
@@ -59,9 +65,11 @@ function App() {
                         <span className="text-white font-bold">MAXIMUM</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Activity size={16} className="animate-spin" />
+                        <Activity size={16} className={isConnected ? "animate-spin" : ""} />
                         <span className="hidden sm:inline">SYSTEM_MONITORING:</span>
-                        <span className="text-green-300 font-bold">ACTIVE</span>
+                        <span className={isConnected ? "text-green-300 font-bold" : "text-red-500 font-bold"}>
+                            {isConnected ? "ACTIVE" : "OFFLINE"}
+                        </span>
                     </div>
                 </div>
 
@@ -80,18 +88,14 @@ function App() {
                     </div>
                 </div>
 
-                {/* HÀNG 2: Screenshot & Webcam (THAY ĐỔI LỚN TẠI ĐÂY) */}
-                {/* Chuyển thành Grid 2 cột giống hàng 1 để Webcam nằm cạnh Screenshot */}
+                {/* HÀNG 2: Screenshot & Webcam */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                    {/* Cột trái: Screenshot */}
                     <div className="glass-panel p-1 rounded-xl border border-green-500/20">
                         <div className="bg-black/40 p-4 rounded-lg h-full">
                             <ScreenshotCard />
                         </div>
                     </div>
 
-                    {/* Cột phải: Webcam (MỚI) */}
                     <div className="glass-panel p-1 rounded-xl border border-green-500/20">
                         <div className="bg-black/40 p-4 rounded-lg h-full">
                             <WebcamCard />
@@ -112,7 +116,7 @@ function App() {
             <footer className="border-t border-green-500/20 bg-black/90 py-4 mt-8">
                 <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-600 font-mono tracking-widest">
                     <div>
-                        SYSTEM_ID: <span className="text-green-700">CL-8821-X</span> | LATENCY: 24ms
+                        SYSTEM_ID: <span className="text-green-700">CL-8821-X</span> | LATENCY: {isConnected ? "24ms" : "--"}
                     </div>
                     <div>
                         {'// UNAUTHORIZED ACCESS IS PROHIBITED //'}
