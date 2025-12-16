@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\client_\\IpAgent\\IpAgent.csproj": {}
+    "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\client_\\IpAgent\\IpAgent.csproj": {}
   },
   "projects": {
-    "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\client_\\IpAgent\\IpAgent.csproj": {
+    "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\client_\\IpAgent\\IpAgent.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\client_\\IpAgent\\IpAgent.csproj",
+        "projectUniqueName": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\client_\\IpAgent\\IpAgent.csproj",
         "projectName": "IpAgent",
-        "projectPath": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\client_\\IpAgent\\IpAgent.csproj",
+        "projectPath": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\client_\\IpAgent\\IpAgent.csproj",
         "packagesPath": "C:\\Users\\Minh Duc\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\client_\\IpAgent\\obj\\",
+        "outputPath": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\client_\\IpAgent\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Minh Duc\\AppData\\Roaming\\NuGet\\NuGet.Config"

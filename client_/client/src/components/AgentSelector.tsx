@@ -1,166 +1,115 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { useSocket } from '../contexts/SocketContext';
-import { Search, Zap, Loader2, Power, Wifi, WifiOff } from 'lucide-react';
+import { useSocket } from '../contexts/SocketContext'; // Đảm bảo đường dẫn đúng tới SocketContext của bạn
+import { Agent } from '../types'; // Đảm bảo đường dẫn đúng tới file types
+import { CyberCard, CyberButton } from './CyberUI'; // Import giao diện Cyberpunk vừa tạo
+import { Wifi, Activity, Terminal, ShieldAlert } from 'lucide-react'; // Cần cài: npm install lucide-react
 
-export const AgentSelector: React.FC = () => {
-    const {
-        isConnected, isScanning, agents, selectedAgentId,
-        selectAgent, startScan, connectToIp, serverIP, socket
-    } = useSocket();
+interface AgentSelectorProps {
+  onSelectAgent: (agentId: string) => void;
+}
 
-    const [manualIP, setManualIP] = useState("127.0.0.1");
+const AgentSelector: React.FC<AgentSelectorProps> = ({ onSelectAgent }) => {
+  const { socket, isConnected } = useSocket();
+  const [connectedAgents, setConnectedAgents] = useState<Agent[]>([]);
 
-    // Tự động chọn agent đầu tiên nếu có
-    useEffect(() => {
-        if (agents.length > 0 && !selectedAgentId) {
-            selectAgent(agents[0].id);
-        }
-    }, [agents, selectedAgentId, selectAgent]);
+  // Lắng nghe sự kiện từ Server để cập nhật danh sách Agent
+  useEffect(() => {
+    if (!socket) return;
 
-    // Hàm ngắt kết nối thủ công
-    const handleDisconnect = async () => {
-        if (socket && isConnected) {
-            try {
-                await socket.stop();
-                window.location.reload();
-            } catch (error) {
-                console.error("Lỗi khi ngắt kết nối:", error);
-            }
-        }
+    // Yêu cầu danh sách agent ngay khi vào (nếu cần)
+    // socket.emit('get_agents'); 
+
+    const handleAgentList = (agents: Agent[]) => {
+      console.log("Agents updated:", agents);
+      setConnectedAgents(agents);
     };
 
-    return (
-        <div className="glass-panel p-6 rounded-lg relative overflow-hidden">
-            {/* ĐÃ XÓA PHẦN BACKGROUND WIFI Ở ĐÂY CHO GỌN */}
+    const handleNewAgent = (agent: Agent) => {
+      setConnectedAgents(prev => {
+        if (prev.find(a => a.id === agent.id)) return prev;
+        return [...prev, agent];
+      });
+    };
 
-            {/* HEADER */}
-            <div className="flex justify-between items-start mb-6">
-                <div>
-                    <h2 className="text-xl font-bold text-cyan-500 neon-glow-cyan tracking-wider flex items-center gap-2">
-                        {'> TARGET_CONTROL_'}
-                    </h2>
-                    <p className="text-[10px] text-cyan-500/50 font-mono mt-1">
-                        // SECURE_UPLINK_V3.0
-                    </p>
-                </div>
+    const handleAgentDisconnect = (agentId: string) => {
+      setConnectedAgents(prev => prev.filter(a => a.id !== agentId));
+    };
 
-                {/* TRẠNG THÁI STATUS BOX (VẪN GIỮ LẠI VÌ NÓ ĐẸP) */}
-                <div className={`flex flex-col items-end px-3 py-2 rounded border ${isConnected
-                        ? 'bg-green-950/30 border-green-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
-                        : 'bg-red-950/30 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
-                    }`}>
-                    <span className={`text-[10px] font-bold mb-1 ${isConnected ? 'text-green-500/70' : 'text-red-500/70'}`}>
-                        STATUS:
-                    </span>
-                    <div className="flex items-center gap-2">
-                        {isConnected ? (
-                            <>
-                                <Wifi className="w-4 h-4 text-green-500 animate-pulse" />
-                                <span className="text-xl font-black text-green-500 tracking-widest neon-glow-green">ONLINE</span>
-                            </>
-                        ) : (
-                            <>
-                                <WifiOff className="w-4 h-4 text-red-500" />
-                                <span className="text-xl font-black text-red-500 tracking-widest neon-glow-red">OFFLINE</span>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
+    socket.on('agent_list', handleAgentList);
+    socket.on('agent_connected', handleNewAgent);
+    socket.on('agent_disconnected', handleAgentDisconnect);
 
-            <div className="space-y-4 relative z-10">
-                {/* LOGIC HIỂN THỊ */}
-                {!isConnected ? (
-                    // --- GIAO DIỆN KHI CHƯA KẾT NỐI ---
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                        <label className="block text-cyan-500/60 text-xs font-bold mb-2 flex justify-between">
-                            <span>{'// MANUAL_IP_ENTRY'}</span>
-                            <span className="text-cyan-500/30">WAITING_FOR_INPUT...</span>
-                        </label>
+    return () => {
+      socket.off('agent_list', handleAgentList);
+      socket.off('agent_connected', handleNewAgent);
+      socket.off('agent_disconnected', handleAgentDisconnect);
+    };
+  }, [socket]);
 
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={manualIP}
-                                onChange={(e) => setManualIP(e.target.value)}
-                                placeholder="192.168.1.X"
-                                className="flex-1 bg-black border border-cyan-500/30 text-cyan-500 px-4 py-3 rounded font-mono focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all placeholder:text-cyan-900"
-                            />
-
-                            <button
-                                onClick={() => connectToIp(manualIP)}
-                                className="group bg-cyan-950/30 border border-cyan-500/50 hover:bg-cyan-500/20 text-cyan-500 px-6 py-3 rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2"
-                            >
-                                <Zap className="w-4 h-4 group-hover:fill-current" />
-                                <span className="font-bold text-sm">CONNECT</span>
-                            </button>
-                        </div>
-
-                        {/* Scan Button */}
-                        <div className="mt-3">
-                            <button
-                                onClick={() => startScan()}
-                                disabled={isScanning}
-                                className={`w-full border px-4 py-3 rounded transition-all duration-300 flex items-center justify-center gap-2 font-bold text-sm ${isScanning
-                                        ? 'bg-yellow-950/20 border-yellow-500/30 text-yellow-500 cursor-wait'
-                                        : 'bg-black border-cyan-500/30 text-cyan-500 hover:bg-cyan-950/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)]'
-                                    }`}
-                            >
-                                {isScanning ? (
-                                    <>
-                                        <Loader2 className="animate-spin w-4 h-4" />
-                                        <span>SCANNING_NETWORK_NODES...</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Search className="w-4 h-4" />
-                                        <span>AUTO_SCAN_LAN_DEVICES</span>
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    // --- GIAO DIỆN KHI ĐÃ KẾT NỐI (ONLINE) ---
-                    <div className="animate-in zoom-in-95 duration-300">
-                        <div className="bg-green-950/10 border border-green-500/30 rounded p-4 mb-4">
-                            <label className="block text-green-500/60 text-xs font-bold mb-2">
-                                {'// ACTIVE_TARGET_ID'}
-                            </label>
-
-                            <select
-                                className="w-full bg-black border border-green-500/50 px-4 py-3 rounded text-green-400 font-bold font-mono hover:bg-green-900/10 focus:outline-none focus:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all cursor-pointer"
-                                value={selectedAgentId || ''}
-                                onChange={(e) => selectAgent(e.target.value)}
-                            >
-                                {agents.map((agent) => (
-                                    <option key={agent.id} value={agent.id}>
-                                        TARGET: {agent.name}
-                                    </option>
-                                ))}
-                            </select>
-
-                            <div className="flex justify-between items-center mt-2 px-1">
-                                <div className="text-[10px] text-green-500/50">
-                                    SERVER_IP: <span className="text-green-400 font-mono">{serverIP}</span>
-                                </div>
-                                <div className="text-[10px] text-green-500/50 animate-pulse">
-                                    ● UPLINK_STABLE
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* --- NÚT DISCONNECT --- */}
-                        <button
-                            onClick={handleDisconnect}
-                            className="w-full group bg-red-950/20 border border-red-500/30 hover:bg-red-500/10 text-red-500 px-4 py-3 rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)] flex items-center justify-center gap-2"
-                        >
-                            <Power className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                            <span className="font-bold text-sm tracking-wider">TERMINATE_CONNECTION</span>
-                        </button>
-                    </div>
-                )}
-            </div>
+  return (
+    <div className="p-6">
+      {/* Header trạng thái mạng */}
+      <div className="flex items-center justify-between mb-8 border-b border-cyber-blue/30 pb-4">
+        <div className="flex items-center space-x-3">
+          <Terminal className="w-8 h-8 text-cyber-yellow animate-pulse" />
+          <div>
+            <h2 className="text-2xl font-display font-bold text-cyber-yellow tracking-widest">NET_WATCH</h2>
+            <p className="text-xs text-cyber-blue font-mono">SYSTEM MONITORING INTERFACE v2.0.77</p>
+          </div>
         </div>
-    );
+        <div className="flex items-center space-x-2 font-mono text-sm">
+           <span className={isConnected ? "text-cyber-blue" : "text-cyber-red"}>
+              {isConnected ? "NETWORK: SECURE" : "NETWORK: OFFLINE"}
+           </span>
+           <div className={`w-3 h-3 ${isConnected ? "bg-cyber-blue shadow-[0_0_10px_#00F0FF]" : "bg-cyber-red"} rotate-45`}></div>
+        </div>
+      </div>
+
+      {/* Grid danh sách máy trạm */}
+      {connectedAgents.length === 0 ? (
+        <div className="text-center py-20 border border-dashed border-gray-700 bg-black/50">
+           <ShieldAlert className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+           <p className="text-gray-500 font-mono text-xl">NO ACTIVE SIGNALS DETECTED...</p>
+           <p className="text-gray-700 text-sm mt-2">Waiting for connection handshake</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {connectedAgents.map((agent) => (
+            <CyberCard key={agent.id} title={`UNIT: ${agent.name || 'UNKNOWN'}`} className="hover:scale-[1.02] transition-transform duration-300 group">
+                <div className="space-y-5 relative">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 text-[4rem] font-bold text-white/5 font-display -z-10 select-none">
+                      {agent.id.slice(-2)}
+                    </div>
+
+                    <div className="flex items-center space-x-3 text-cyber-blue border-b border-white/10 pb-3">
+                        <Wifi className="w-5 h-5" />
+                        <span className="text-lg tracking-wider font-mono">{agent.id}</span>
+                    </div>
+                    
+                    {/* Bảng thông số kỹ thuật giả lập */}
+                    <div className="grid grid-cols-2 gap-px bg-cyber-blue/20 border border-cyber-blue/30 text-xs font-mono">
+                        <div className="bg-cyber-black/90 p-2 text-gray-400">OS SYSTEM</div>
+                        <div className="bg-cyber-black/90 p-2 text-right text-white">WIN_11_PRO</div>
+                        <div className="bg-cyber-black/90 p-2 text-gray-400">LATENCY</div>
+                        <div className="bg-cyber-black/90 p-2 text-right text-cyber-yellow">24ms</div>
+                        <div className="bg-cyber-black/90 p-2 text-gray-400">STATUS</div>
+                        <div className="bg-cyber-black/90 p-2 text-right text-cyber-blue font-bold animate-pulse">CONNECTED</div>
+                    </div>
+
+                    <CyberButton onClick={() => onSelectAgent(agent.id)} variant="secondary" className="w-full mt-2 group-hover:bg-cyber-blue group-hover:text-black">
+                        <div className="flex items-center justify-center space-x-2">
+                           <Activity className="w-4 h-4" />
+                           <span>JACK IN {'>'}</span>
+                        </div>
+                    </CyberButton>
+                </div>
+            </CyberCard>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
+
+export default AgentSelector;

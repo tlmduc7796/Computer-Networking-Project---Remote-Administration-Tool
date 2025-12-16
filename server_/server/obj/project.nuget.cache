@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tnrQibf+vL8=",
+  "dgSpecHash": "njLOaft8JsA=",
   "success": true,
-  "projectFilePath": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\server_\\server\\server_os.csproj",
+  "projectFilePath": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\server_\\server\\server_os.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Minh Duc\\.nuget\\packages\\aforge\\2.2.5\\aforge.2.2.5.nupkg.sha512",
     "C:\\Users\\Minh Duc\\.nuget\\packages\\aforge.video\\2.2.5\\aforge.video.2.2.5.nupkg.sha512",

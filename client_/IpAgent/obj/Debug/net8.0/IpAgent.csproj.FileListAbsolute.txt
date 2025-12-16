@@ -33,3 +33,21 @@ D:\MyProject\CPP\CNW\Computer_Networking-Project_1\client_\IpAgent\obj\Debug\net
 D:\MyProject\CPP\CNW\Computer_Networking-Project_1\client_\IpAgent\obj\Debug\net8.0\IpAgent.pdb
 D:\MyProject\CPP\CNW\Computer_Networking-Project_1\client_\IpAgent\obj\Debug\net8.0\IpAgent.genruntimeconfig.cache
 D:\MyProject\CPP\CNW\Computer_Networking-Project_1\client_\IpAgent\obj\Debug\net8.0\ref\IpAgent.dll
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\IpAgent.exe
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\IpAgent.deps.json
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\IpAgent.runtimeconfig.json
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\IpAgent.dll
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\IpAgent.pdb
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\bin\Debug\net8.0\Fleck.dll
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.csproj.AssemblyReference.cache
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.AssemblyInfoInputs.cache
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.AssemblyInfo.cs
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.csproj.CoreCompileInputs.cache
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.sourcelink.json
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.csproj.Up2Date
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.dll
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\refint\IpAgent.dll
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.pdb
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\IpAgent.genruntimeconfig.cache
+D:\MyProject\CPP\TEST - CNW\Computer-Networking-Project---Remote-Administration-Tool\client_\IpAgent\obj\Debug\net8.0\ref\IpAgent.dll

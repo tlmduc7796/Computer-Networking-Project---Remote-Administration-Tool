@@ -789,11 +789,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\server_\\server\\server_os.csproj",
+      "projectUniqueName": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\server_\\server\\server_os.csproj",
       "projectName": "server_os",
-      "projectPath": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\server_\\server\\server_os.csproj",
+      "projectPath": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\server_\\server\\server_os.csproj",
       "packagesPath": "C:\\Users\\Minh Duc\\.nuget\\packages\\",
-      "outputPath": "D:\\MyProject\\CPP\\CNW\\Computer_Networking-Project_1\\server_\\server\\obj\\",
+      "outputPath": "D:\\MyProject\\CPP\\TEST - CNW\\Computer-Networking-Project---Remote-Administration-Tool\\server_\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Minh Duc\\AppData\\Roaming\\NuGet\\NuGet.Config"
