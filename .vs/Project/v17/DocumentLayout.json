@@ -3,112 +3,60 @@
   "WorkspaceRootPath": "D:\\Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\Hubs\\SystemHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\Hubs\\SystemHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\run_client.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\run_client.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\Services\\KeyloggerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\Services\\KeyloggerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\contexts\\SocketContext.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\contexts\\SocketContext.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\KeyloggerCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\KeyloggerCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\vite.config.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\vite.config.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\IpAgent\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\IpAgent\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\App.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\App.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\services\\socketService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\services\\socketService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\Services\\SystemActionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\Services\\SystemActionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_\\server\\Hubs\\SystemHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_\\server\\Hubs\\SystemHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\services\\socketService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\services\\socketService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\components\\ProcessManager.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\components\\ProcessManager.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\contexts\\SocketContext.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\contexts\\SocketContext.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\components\\AgentSelector.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\components\\AgentSelector.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\ApplicationsTab.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\ApplicationsTab.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\ScreenshotCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\ScreenshotCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\components\\KeyloggerCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\components\\KeyloggerCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\PowerControls.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\PowerControls.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client_\\client\\src\\components\\WebcamCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client_\\client\\src\\components\\WebcamCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\ProcessManager.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\ProcessManager.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_\\server\\Services\\WebcamService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_\\server\\Services\\WebcamService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\Tabs.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\Tabs.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_\\server\\Services\\KeyloggerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_\\server\\Services\\KeyloggerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\WebcamCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\WebcamCard.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\components\\AgentSelector.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\components\\AgentSelector.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\server_os.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\server_os.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\Properties\\launchSettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\Properties\\launchSettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\protocol.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\protocol.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\vite-env.d.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\vite-env.d.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\wwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\wwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_os\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_os\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\client\\src\\types\\index.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:client\\src\\types\\index.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\server_\\server\\Services\\SystemActionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server_\\server\\Services\\SystemActionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -135,333 +83,176 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "KeyloggerCard.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\KeyloggerCard.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\KeyloggerCard.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\KeyloggerCard.tsx",
-              "RelativeToolTip": "client\\src\\components\\KeyloggerCard.tsx",
-              "ViewState": "AgIAACkAAAAAAAAAAAAswDYAAAAJAAAAAAAAAA==",
+              "Title": "vite.config.ts",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\vite.config.ts",
+              "RelativeDocumentMoniker": "client_\\client\\vite.config.ts",
+              "ToolTip": "D:\\Project\\client_\\client\\vite.config.ts",
+              "RelativeToolTip": "client_\\client\\vite.config.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:32:52.907Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\App.tsx",
-              "RelativeDocumentMoniker": "client\\src\\App.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\App.tsx",
-              "RelativeToolTip": "client\\src\\App.tsx",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAYwHQAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T15:05:37.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "KeyloggerService.cs",
-              "DocumentMoniker": "D:\\Project\\server_os\\Services\\KeyloggerService.cs",
-              "RelativeDocumentMoniker": "server_os\\Services\\KeyloggerService.cs",
-              "ToolTip": "D:\\Project\\server_os\\Services\\KeyloggerService.cs",
-              "RelativeToolTip": "server_os\\Services\\KeyloggerService.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAQwHcAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T13:49:44.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SystemActionService.cs",
-              "DocumentMoniker": "D:\\Project\\server_os\\Services\\SystemActionService.cs",
-              "RelativeDocumentMoniker": "server_os\\Services\\SystemActionService.cs",
-              "ToolTip": "D:\\Project\\server_os\\Services\\SystemActionService.cs",
-              "RelativeToolTip": "server_os\\Services\\SystemActionService.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAYwGUAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T13:49:05.288Z",
+              "WhenOpened": "2025-12-09T17:58:21.025Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SystemHub.cs",
-              "DocumentMoniker": "D:\\Project\\server_os\\Hubs\\SystemHub.cs",
-              "RelativeDocumentMoniker": "server_os\\Hubs\\SystemHub.cs",
-              "ToolTip": "D:\\Project\\server_os\\Hubs\\SystemHub.cs",
-              "RelativeToolTip": "server_os\\Hubs\\SystemHub.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAgwLMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T13:31:54.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "program.cs",
-              "DocumentMoniker": "D:\\Project\\server_os\\program.cs",
-              "RelativeDocumentMoniker": "server_os\\program.cs",
-              "ToolTip": "D:\\Project\\server_os\\program.cs",
-              "RelativeToolTip": "server_os\\program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T13:50:27.825Z",
+              "Title": "run_client.bat",
+              "DocumentMoniker": "D:\\Project\\client_\\run_client.bat",
+              "RelativeDocumentMoniker": "client_\\run_client.bat",
+              "ToolTip": "D:\\Project\\client_\\run_client.bat",
+              "RelativeToolTip": "client_\\run_client.bat",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAVAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFjSURBVDhPY6AI/P//n7G1s\u002Bc/lEsWYILSRANbaysUmgHkgl\u002B/fpGFQXqxuuDkyZMMEydOBNOEAIYBixYvZhARl2QIiohi4BeTYJg\u002BcxZUBjtAMeDSpUsM1rb2DEoKcgwnDx9kUFOQZ7BxcQeL4wIoBuzfv5\u002BBjZOTYe2aNQyRkZEM69auYWBjY2VYv3UHw4otuxl2HzzK8OPHD6hqCEAxwNHRkeHrt28MQcEhDMuXL2cIANLP33xgUPdNYdB3dGN4JajGcPrSVahqCEAxQE9Pj\u002BHE4UMMV\u002B89ZNC1tGW4dOcBw7kzZxn0lYQZLj/5zGCoLMrw9NU7qGoIwAjEhLhYhm9vXjDsWLOC4fe7lwxm\u002BloMl\u002B69ZdCV4WW4cO8Ng4meNlQlBLBAaRRgbm4OxiAA8vOPU2cZLj34xqCnpswgIyYFFocBDBegAw4ODgYXO2uGcB9XBh01JTAfGVCcFwYaMDAAABi9qE6NKlarAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-12-09T17:31:40.872Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "socketService.ts",
-              "DocumentMoniker": "D:\\Project\\client\\src\\services\\socketService.ts",
-              "RelativeDocumentMoniker": "client\\src\\services\\socketService.ts",
-              "ToolTip": "D:\\Project\\client\\src\\services\\socketService.ts",
-              "RelativeToolTip": "client\\src\\services\\socketService.ts",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAIgAAAAFAAAAAAAAAA==",
+              "Title": "ProcessManager.tsx",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\components\\ProcessManager.tsx",
+              "RelativeDocumentMoniker": "client_\\client\\src\\components\\ProcessManager.tsx",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\components\\ProcessManager.tsx",
+              "RelativeToolTip": "client_\\client\\src\\components\\ProcessManager.tsx",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAgwDwAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:28:28.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SocketContext.ts",
-              "DocumentMoniker": "D:\\Project\\client\\src\\contexts\\SocketContext.ts",
-              "RelativeDocumentMoniker": "client\\src\\contexts\\SocketContext.ts",
-              "ToolTip": "D:\\Project\\client\\src\\contexts\\SocketContext.ts",
-              "RelativeToolTip": "client\\src\\contexts\\SocketContext.ts",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAqwHkAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:27:29.022Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ApplicationsTab.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\ApplicationsTab.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\ApplicationsTab.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\ApplicationsTab.tsx",
-              "RelativeToolTip": "client\\src\\components\\ApplicationsTab.tsx",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAqwKAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:48:42.122Z"
+              "WhenOpened": "2025-12-09T16:58:04.497Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "PowerControls.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\PowerControls.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\PowerControls.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\PowerControls.tsx",
-              "RelativeToolTip": "client\\src\\components\\PowerControls.tsx",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCEAAAAAAAAAAAAAAA==",
+              "Title": "WebcamCard.tsx",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\components\\WebcamCard.tsx",
+              "RelativeDocumentMoniker": "client_\\client\\src\\components\\WebcamCard.tsx",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\components\\WebcamCard.tsx",
+              "RelativeToolTip": "client_\\client\\src\\components\\WebcamCard.tsx",
+              "ViewState": "AgIAABkBAAAAAAAAAAAiwDMBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:42:19.885Z"
+              "WhenOpened": "2025-12-09T10:52:21.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\client_\\IpAgent\\Program.cs",
+              "RelativeDocumentMoniker": "client_\\IpAgent\\Program.cs",
+              "ToolTip": "D:\\Project\\client_\\IpAgent\\Program.cs",
+              "RelativeToolTip": "client_\\IpAgent\\Program.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowEAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T06:00:39.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SocketContext.ts",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\contexts\\SocketContext.ts",
+              "RelativeDocumentMoniker": "client_\\client\\src\\contexts\\SocketContext.ts",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\contexts\\SocketContext.ts",
+              "RelativeToolTip": "client_\\client\\src\\contexts\\SocketContext.ts",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAiwPYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-12-09T05:54:44.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "socketService.ts",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\services\\socketService.ts",
+              "RelativeDocumentMoniker": "client_\\client\\src\\services\\socketService.ts",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\services\\socketService.ts",
+              "RelativeToolTip": "client_\\client\\src\\services\\socketService.ts",
+              "ViewState": "AgIAABYAAAAAAAAAAAAiwEIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-12-09T05:55:05.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SystemHub.cs",
+              "DocumentMoniker": "D:\\Project\\server_\\server\\Hubs\\SystemHub.cs",
+              "RelativeDocumentMoniker": "server_\\server\\Hubs\\SystemHub.cs",
+              "ToolTip": "D:\\Project\\server_\\server\\Hubs\\SystemHub.cs",
+              "RelativeToolTip": "server_\\server\\Hubs\\SystemHub.cs",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAmwPsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T04:10:18.753Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ScreenshotCard.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\ScreenshotCard.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\ScreenshotCard.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\ScreenshotCard.tsx",
-              "RelativeToolTip": "client\\src\\components\\ScreenshotCard.tsx",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAqwGkAAAAlAAAAAAAAAA==",
+              "Title": "KeyloggerCard.tsx",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\components\\KeyloggerCard.tsx",
+              "RelativeDocumentMoniker": "client_\\client\\src\\components\\KeyloggerCard.tsx",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\components\\KeyloggerCard.tsx",
+              "RelativeToolTip": "client_\\client\\src\\components\\KeyloggerCard.tsx",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAkwG8AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:33:10.251Z"
+              "WhenOpened": "2025-12-09T10:52:45.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.tsx",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\main.tsx",
+              "RelativeDocumentMoniker": "client_\\client\\src\\main.tsx",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\main.tsx",
+              "RelativeToolTip": "client_\\client\\src\\main.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-12-09T16:33:59.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AgentSelector.tsx",
+              "DocumentMoniker": "D:\\Project\\client_\\client\\src\\components\\AgentSelector.tsx",
+              "RelativeDocumentMoniker": "client_\\client\\src\\components\\AgentSelector.tsx",
+              "ToolTip": "D:\\Project\\client_\\client\\src\\components\\AgentSelector.tsx",
+              "RelativeToolTip": "client_\\client\\src\\components\\AgentSelector.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-12-09T16:58:00.634Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "ProcessManager.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\ProcessManager.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\ProcessManager.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\ProcessManager.tsx",
-              "RelativeToolTip": "client\\src\\components\\ProcessManager.tsx",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwL0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:47:56.824Z"
+              "Title": "WebcamService.cs",
+              "DocumentMoniker": "D:\\Project\\server_\\server\\Services\\WebcamService.cs",
+              "RelativeDocumentMoniker": "server_\\server\\Services\\WebcamService.cs",
+              "ToolTip": "D:\\Project\\server_\\server\\Services\\WebcamService.cs",
+              "RelativeToolTip": "server_\\server\\Services\\WebcamService.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAmwGAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T05:35:29.49Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "Tabs.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\Tabs.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\Tabs.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\Tabs.tsx",
-              "RelativeToolTip": "client\\src\\components\\Tabs.tsx",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAiwBsAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T14:48:30.096Z"
+              "Title": "KeyloggerService.cs",
+              "DocumentMoniker": "D:\\Project\\server_\\server\\Services\\KeyloggerService.cs",
+              "RelativeDocumentMoniker": "server_\\server\\Services\\KeyloggerService.cs",
+              "ToolTip": "D:\\Project\\server_\\server\\Services\\KeyloggerService.cs",
+              "RelativeToolTip": "server_\\server\\Services\\KeyloggerService.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAmwI8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T05:34:46.061Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "WebcamCard.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\WebcamCard.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\WebcamCard.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\WebcamCard.tsx",
-              "RelativeToolTip": "client\\src\\components\\WebcamCard.tsx",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAqwHUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-04T02:02:56.292Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AgentSelector.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\components\\AgentSelector.tsx",
-              "RelativeDocumentMoniker": "client\\src\\components\\AgentSelector.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\components\\AgentSelector.tsx",
-              "RelativeToolTip": "client\\src\\components\\AgentSelector.tsx",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T15:05:14.006Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\Project\\server_os\\wwwroot\\index.html",
-              "RelativeDocumentMoniker": "server_os\\wwwroot\\index.html",
-              "ToolTip": "D:\\Project\\server_os\\wwwroot\\index.html",
-              "RelativeToolTip": "server_os\\wwwroot\\index.html",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAAABABAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-04T02:33:18.038Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "server_os.csproj",
-              "DocumentMoniker": "D:\\Project\\server_os\\server_os.csproj",
-              "RelativeDocumentMoniker": "server_os\\server_os.csproj",
-              "ToolTip": "D:\\Project\\server_os\\server_os.csproj",
-              "RelativeToolTip": "server_os\\server_os.csproj",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAiwA0AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-03T13:48:07.053Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "index.css",
-              "DocumentMoniker": "D:\\Project\\client\\src\\index.css",
-              "RelativeDocumentMoniker": "client\\src\\index.css",
-              "ToolTip": "D:\\Project\\client\\src\\index.css",
-              "RelativeToolTip": "client\\src\\index.css",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAkwGkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-12-03T16:48:18.315Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Project\\server_os\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "server_os\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\Project\\server_os\\Properties\\launchSettings.json",
-              "RelativeToolTip": "server_os\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-04T02:30:08.326Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\Project\\client\\index.html",
-              "RelativeDocumentMoniker": "client\\index.html",
-              "ToolTip": "D:\\Project\\client\\index.html",
-              "RelativeToolTip": "client\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-03T16:44:42.639Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "main.tsx",
-              "DocumentMoniker": "D:\\Project\\client\\src\\main.tsx",
-              "RelativeDocumentMoniker": "client\\src\\main.tsx",
-              "ToolTip": "D:\\Project\\client\\src\\main.tsx",
-              "RelativeToolTip": "client\\src\\main.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T15:05:47.763Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "protocol.ts",
-              "DocumentMoniker": "D:\\Project\\client\\src\\protocol.ts",
-              "RelativeDocumentMoniker": "client\\src\\protocol.ts",
-              "ToolTip": "D:\\Project\\client\\src\\protocol.ts",
-              "RelativeToolTip": "client\\src\\protocol.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T15:06:08.354Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "package.json",
-              "DocumentMoniker": "D:\\Project\\client\\package.json",
-              "RelativeDocumentMoniker": "client\\package.json",
-              "ToolTip": "D:\\Project\\client\\package.json",
-              "RelativeToolTip": "client\\package.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-03T16:45:08.955Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "vite-env.d.ts",
-              "DocumentMoniker": "D:\\Project\\client\\src\\vite-env.d.ts",
-              "RelativeDocumentMoniker": "client\\src\\vite-env.d.ts",
-              "ToolTip": "D:\\Project\\client\\src\\vite-env.d.ts",
-              "RelativeToolTip": "client\\src\\vite-env.d.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T16:51:33.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\Project\\server_os\\wwroot\\index.html",
-              "RelativeDocumentMoniker": "server_os\\wwroot\\index.html",
-              "ToolTip": "D:\\Project\\server_os\\wwroot\\index.html",
-              "RelativeToolTip": "server_os\\wwroot\\index.html",
-              "ViewState": "AgIAACgBAAAAAAAAAAAQwEABAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-12-03T14:21:03.223Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Project\\server_os\\appsettings.json",
-              "RelativeDocumentMoniker": "server_os\\appsettings.json",
-              "ToolTip": "D:\\Project\\server_os\\appsettings.json",
-              "RelativeToolTip": "server_os\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-03T14:10:38.202Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "index.ts",
-              "DocumentMoniker": "D:\\Project\\client\\src\\types\\index.ts",
-              "RelativeDocumentMoniker": "client\\src\\types\\index.ts",
-              "ToolTip": "D:\\Project\\client\\src\\types\\index.ts",
-              "RelativeToolTip": "client\\src\\types\\index.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-12-03T15:05:31.953Z"
+              "Title": "SystemActionService.cs",
+              "DocumentMoniker": "D:\\Project\\server_\\server\\Services\\SystemActionService.cs",
+              "RelativeDocumentMoniker": "server_\\server\\Services\\SystemActionService.cs",
+              "ToolTip": "D:\\Project\\server_\\server\\Services\\SystemActionService.cs",
+              "RelativeToolTip": "server_\\server\\Services\\SystemActionService.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAowJ0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T05:14:37.166Z"
             }
           ]
         },

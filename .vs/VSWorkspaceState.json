@@ -1,16 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\client",
-    "\\client\\src",
-    "\\client\\src\\types",
-    "\\server_os",
-    "\\server_os\\Hubs",
-    "\\server_os\\obj",
-    "\\server_os\\Properties",
-    "\\server_os\\Services",
-    "\\server_os\\wwwroot"
+    "\\client_",
+    "\\client_\\client",
+    "\\client_\\client\\src",
+    "\\client_\\client\\src\\contexts",
+    "\\client_\\IpAgent"
   ],
-  "SelectedNode": "\\server_os\\Hubs\\SystemHub.cs",
+  "SelectedNode": "\\client_\\run_client.bat",
   "PreviewInSolutionExplorer": false
 }
