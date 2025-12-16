@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+// Lưu ý: Class 'Screen' nằm trong System.Windows.Forms.
+// Hãy đảm bảo project của bạn có tham chiếu đến System.Windows.Forms hoặc là project WinForms/WPF.
+using System.Windows.Forms; 
 
 namespace server_os.Services
 {
@@ -15,11 +18,17 @@ namespace server_os.Services
         public void Shutdown() => Process.Start("shutdown", "/s /t 0");
         public void Restart() => Process.Start("shutdown", "/r /t 0");
 
-        // --- 2. CAPTURE SCREEN (Giữ nguyên) ---
+        // --- 2. CAPTURE SCREEN (Đã sửa Warning CS8602) ---
         public string CaptureScreenToBase64()
         {
             try
             {
+                // SỬA: Kiểm tra null trước khi truy cập Bounds
+                if (Screen.PrimaryScreen == null)
+                {
+                    return "Error: No screen detected (PrimaryScreen is null)";
+                }
+
                 Rectangle bounds = Screen.PrimaryScreen.Bounds;
                 using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
                 {
@@ -37,7 +46,7 @@ namespace server_os.Services
             catch (Exception ex) { return "Error: " + ex.Message; }
         }
 
-        // --- 3. REAL PROCESS MANAGER (NÂNG CẤP) ---
+        // --- 3. REAL PROCESS MANAGER (Giữ nguyên) ---
         public List<string> GetProcessList()
         {
             List<string> list = new List<string>();
@@ -63,7 +72,6 @@ namespace server_os.Services
                     if (pid == 4) name = "System";
 
                     // 2. Lấy Title và xác định Type (APP hay PROC)
-                    // Cần try-catch riêng vì p.MainWindowTitle có thể lỗi với process hệ thống
                     try
                     {
                         title = p.MainWindowTitle;
@@ -95,17 +103,14 @@ namespace server_os.Services
                     }
                     catch
                     {
-                        // Process hệ thống không cho đọc CPU time thì để 0
                         cpuUsage = 0;
                     }
 
                     // Format dữ liệu gửi về Client
-                    // [TYPE] ID:x | Name:x | Title:x | CPU:x | RAM:x
                     list.Add($"[{type}] ID:{pid} | Name:{name} | Title:{title} | CPU:{cpuUsage:0.0} | RAM:{memMb:0}");
                 }
                 catch
                 {
-                    // Bỏ qua các process bị Access Denied hoàn toàn (như Antivirus xịn)
                     continue;
                 }
             }
@@ -128,7 +133,7 @@ namespace server_os.Services
             catch (Exception ex) { return "Lỗi: " + ex.Message; }
         }
 
-        // --- 4. START APP & REGISTRY (Giữ nguyên) ---
+        // --- 4. START APP & REGISTRY (Đã sửa Warning CS0162) ---
         private RegistryKey? GetBaseRegistryKey(string link)
         {
             if (link.Contains('\\'))
@@ -145,11 +150,13 @@ namespace server_os.Services
             }
             return null;
         }
+
         public string StartProcess(string appName)
         {
             try { Process.Start(appName); return $"Started: {appName}"; }
             catch (Exception ex) { return "Error: " + ex.Message; }
         }
+
         public string RegistryAction(string action, string link, string valueName, string value, string typeValue)
         {
             try
@@ -158,9 +165,8 @@ namespace server_os.Services
                 if (baseKey == null) return "Lỗi: Không tìm thấy Root Key";
 
                 string subKeyPath = link.Substring(link.IndexOf('\\') + 1);
-                RegistryKey? key = baseKey.OpenSubKey(subKeyPath, true); // True để cho phép ghi
+                RegistryKey? key = baseKey.OpenSubKey(subKeyPath, true); 
 
-                // Nếu mở không được (do key chưa có hoặc lỗi quyền), thử tạo mới nếu là lệnh Create
                 if (key == null && action != "Create key") return "Lỗi: Không tìm thấy đường dẫn Key";
 
                 switch (action)
@@ -200,7 +206,7 @@ namespace server_os.Services
             {
                 return "Lỗi Registry: " + ex.Message;
             }
-            return "Registry logic placeholder";
+            // SỬA: Đã xóa dòng 'return "Registry logic placeholder";' thừa ở đây
         }
     }
 }
