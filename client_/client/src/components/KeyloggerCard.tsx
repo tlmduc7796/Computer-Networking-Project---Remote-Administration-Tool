@@ -4,14 +4,17 @@ import { useState, useEffect, useRef } from 'react';
 import { Keyboard, Play, Square, Trash2, Download } from 'lucide-react';
 import { useSocket } from '../contexts/SocketContext';
 import { sendCommand } from '../services/socketService';
+// Import component Cyberpunk
+import { CyberCard, CyberButton } from './CyberUI'; 
 
 export default function KeyloggerCard() {
+    // --- GIỮ NGUYÊN LOGIC GỐC CỦA BẠN (KHÔNG SỬA GÌ CẢ) ---
     const [isLogging, setIsLogging] = useState(false);
     const [logs, setLogs] = useState<string>("");
     const { socket, isConnected } = useSocket();
     const logContainerRef = useRef<HTMLDivElement>(null);
 
-    // --- SỬA LẠI LOGIC LẮNG NGHE ---
+    // --- SỬA LẠI LOGIC LẮNG NGHE (Y HỆT CODE BẠN GỬI) ---
     useEffect(() => {
         if (!socket) return;
 
@@ -37,7 +40,7 @@ export default function KeyloggerCard() {
         };
     }, [socket]);
 
-    // Auto scroll
+    // Auto scroll (Y HỆT CODE BẠN GỬI)
     useEffect(() => {
         if (logContainerRef.current) {
             logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
@@ -66,61 +69,76 @@ export default function KeyloggerCard() {
 
     const clearLogs = () => setLogs("");
 
+    // --- CHỈ THAY ĐỔI GIAO DIỆN (Dùng CyberCard & CyberButton) ---
     return (
-        <div className="glass-panel p-6 rounded-lg h-full flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-green-500 neon-glow-green tracking-wider flex items-center gap-2">
-                    <Keyboard className="w-5 h-5" /> {'> KEYLOGGER_'}
-                </h2>
+        <CyberCard title="KEYLOGGER_INTERCEPTOR" className="h-full flex flex-col">
+            {/* Header Status (Design mới) */}
+            <div className="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
                 <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${isLogging ? 'bg-green-500 animate-pulse shadow-[0_0_10px_#10b981]' : 'bg-red-500'}`} />
-                    <span className={`text-xs ${isLogging ? 'text-green-500' : 'text-red-500'}`}>
+                    <Keyboard className="w-4 h-4 text-cyber-yellow animate-pulse" />
+                    <span className="text-xs font-mono text-gray-500">LIVE KEYSTROKE FEED</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${isLogging ? 'bg-cyber-red animate-pulse' : 'bg-gray-600'}`} />
+                    <span className={`text-xs font-bold ${isLogging ? 'text-cyber-red' : 'text-gray-500'}`}>
                         {isLogging ? 'CAPTURING' : 'IDLE'}
                     </span>
                 </div>
             </div>
 
-            {/* Màn hình Terminal */}
+            {/* Màn hình Terminal (Design mới nhưng hiển thị logs cũ) */}
             <div
                 ref={logContainerRef}
-                className="terminal-window p-4 rounded-lg mb-4 flex-1 overflow-y-auto font-mono text-sm bg-black border border-green-500/30 shadow-inner min-h-[250px]"
+                className="flex-1 bg-black border border-gray-800 p-3 overflow-y-auto custom-scrollbar font-mono text-xs shadow-inner min-h-[250px] mb-4"
             >
-                <div className="text-green-500/60 mb-2 italic">
-                    {'// Waiting for keystrokes...'}
+                {logs === "" ? (
+                    <div className="h-full flex flex-col items-center justify-center text-gray-800 opacity-50">
+                        <Keyboard size={48} className="mb-2" />
+                        <p className="italic text-xs text-cyber-yellow">{'// Waiting for input...'}</p>
+                    </div>
+                ) : (
+                    /* Hiển thị logs y hệt code gốc */
+                    <pre className="text-cyber-blue leading-relaxed whitespace-pre-wrap break-all font-mono">
+                        {logs}
+                        {isLogging && <span className="text-cyber-yellow animate-pulse inline-block ml-1">█</span>}
+                    </pre>
+                )}
+            </div>
+
+            {/* Buttons (Design mới dùng CyberButton) */}
+            <div className="grid grid-cols-12 gap-2">
+                <div className="col-span-5">
+                    <CyberButton
+                        onClick={handleStartLogging}
+                        disabled={isLogging || !isConnected}
+                        variant="secondary"
+                        className="w-full text-xs py-2"
+                    >
+                        <Play className="w-3 h-3 mr-2" /> START
+                    </CyberButton>
                 </div>
 
-                {/* Nội dung phím gõ */}
-                <pre className="text-green-500 leading-relaxed whitespace-pre-wrap font-mono break-all">
-                    {logs}
-                </pre>
+                <div className="col-span-5">
+                    <CyberButton
+                        onClick={handleStopLogging}
+                        disabled={!isLogging}
+                        variant="danger"
+                        className="w-full text-xs py-2"
+                    >
+                        <Square className="w-3 h-3 mr-2 fill-current" /> STOP
+                    </CyberButton>
+                </div>
 
-                {isLogging && <span className="text-green-500 animate-pulse inline-block">█</span>}
+                <div className="col-span-2">
+                    <CyberButton 
+                        onClick={clearLogs} 
+                        variant="ghost" 
+                        className="w-full text-xs py-2 px-0 flex justify-center"
+                    >
+                        <Trash2 className="w-4 h-4" />
+                    </CyberButton>
+                </div>
             </div>
-
-            {/* Buttons */}
-            <div className="flex gap-3 mt-auto">
-                <button
-                    onClick={handleStartLogging}
-                    disabled={isLogging || !isConnected}
-                    className="flex-1 bg-black neon-border-green hover:bg-green-950/30 px-4 py-3 rounded transition-all disabled:opacity-50 flex justify-center gap-2"
-                >
-                    <Play className="w-4 h-4 text-green-500" />
-                    <span className="text-green-500 font-bold text-sm">START</span>
-                </button>
-
-                <button
-                    onClick={handleStopLogging}
-                    disabled={!isLogging}
-                    className="flex-1 bg-black neon-border-red hover:bg-red-950/30 px-4 py-3 rounded transition-all disabled:opacity-50 flex justify-center gap-2"
-                >
-                    <Square className="w-4 h-4 text-red-500" />
-                    <span className="text-red-500 font-bold text-sm">STOP</span>
-                </button>
-
-                <button onClick={clearLogs} className="bg-black neon-border-red px-4 py-3 rounded transition-all">
-                    <Trash2 className="w-4 h-4 text-red-500" />
-                </button>
-            </div>
-        </div>
+        </CyberCard>
     );
 }
