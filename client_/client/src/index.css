@@ -1,25 +1,25 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background-color: #020202;
+  background-color: #050505;
   color: #FCEE0A;
   font-family: 'Share Tech Mono', monospace;
   overflow-x: hidden;
 }
 
-/* Hiệu ứng nền lưới Cyberpunk */
+/* Nền lưới Grid */
 .bg-cyber-grid {
   background-size: 40px 40px;
   background-image: 
     linear-gradient(to right, rgba(40, 40, 40, 0.5) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(40, 40, 40, 0.5) 1px, transparent 1px);
   position: relative;
+  min-height: 100vh;
 }
-
-/* Lớp phủ tối góc (Vignette) */
 .bg-cyber-grid::before {
   content: "";
   position: absolute;
@@ -29,33 +29,20 @@ body {
   z-index: 0;
 }
 
-/* Hiệu ứng Scanline (tivi cũ) */
+/* Scanlines TV Effect */
 .scanlines::after {
   content: " ";
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   z-index: 50;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
 
-/* Thanh cuộn phong cách Cyber */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #111;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border: 1px solid #FCEE0A;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #FCEE0A;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border: 1px solid #FCEE0A; }
+::-webkit-scrollbar-thumb:hover { background: #FCEE0A; }

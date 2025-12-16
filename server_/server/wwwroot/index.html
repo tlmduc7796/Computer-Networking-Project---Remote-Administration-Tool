@@ -3,306 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote System Monitor</title>
+    <title>NET_WATCH // SERVER_ADMIN</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #10b981 #1a1a1a;
-        }
-
-        .terminal-font {
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        .glow-green {
-            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-        }
-
-        .status-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .log-entry {
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-black text-gray-100 min-h-screen terminal-font">
-    <div class="container mx-auto px-4 py-6 max-w-7xl">
+<body class="bg-cyber-grid scanlines text-gray-300 font-mono overflow-hidden h-screen flex flex-col">
 
-        <header class="mb-6 border-b-2 border-green-500 pb-4">
-            <div class="flex justify-between items-center">
+    <header class="bg-black/90 border-b border-[#FCEE0A]/30 p-4 shrink-0 z-20">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="p-2 border border-[#FCEE0A] bg-black">
+                    <i data-lucide="server" class="w-6 h-6 text-[#FCEE0A] animate-pulse"></i>
+                </div>
                 <div>
-                    <h1 class="text-3xl font-bold text-green-500 glow-green tracking-wider">▸ REMOTE SYSTEM MONITOR</h1>
-                    <p class="text-gray-500 text-sm mt-1">REAL-TIME DASHBOARD | SIGNALR CORE</p>
-                </div>
-                <div class="flex items-center gap-6 bg-gray-900 px-4 py-3 rounded border border-gray-800">
-                    <div class="flex items-center gap-2">
-                        <span class="text-gray-400 text-sm">SERVER IP:</span>
-                        <span class="text-green-400 font-bold" id="server-ip">Detecting...</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 bg-red-500 rounded-full" id="status-indicator"></span>
-                        <span class="text-gray-400 font-bold" id="server-status">OFFLINE</span>
+                    <h1 class="text-3xl font-display font-black text-white tracking-tighter leading-none">
+                        NET_<span class="text-[#FCEE0A]">WATCH</span>
+                    </h1>
+                    <div class="flex items-center gap-2 text-[10px] text-[#00F0FF] tracking-widest mt-1">
+                        <span class="w-2 h-2 bg-[#00F0FF] rounded-full animate-pulse"></span>
+                        <span>SERVER_MAINFRAME // ONLINE</span>
                     </div>
                 </div>
             </div>
-        </header>
 
-        <section class="mb-6 bg-gray-900 border border-gray-800 rounded-lg p-6">
-            <h2 class="text-xl text-green-400 mb-4 flex items-center gap-2">
-                <i data-lucide="settings" class="w-5 h-5"></i> CONTROL PANEL
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex items-center justify-between bg-black border border-gray-800 rounded p-4">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="wifi" class="w-5 h-5 text-green-400"></i>
-                        <span class="text-gray-300">ACCEPT INCOMING CONNECTIONS</span>
+            <div class="flex items-center gap-6 font-mono text-xs">
+                <div class="text-right">
+                    <p class="text-gray-500">HOST_ADDRESS</p>
+                    <p class="text-[#FCEE0A] text-lg" id="server-ip">127.0.0.1</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-gray-500">UPTIME</p>
+                    <p class="text-[#00F0FF] text-lg" id="uptime-counter">00:00:00</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 container mx-auto p-6 overflow-hidden flex flex-col gap-6 relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-1/3">
+            
+            <div class="lg:col-span-8 cyber-card flex flex-col justify-center">
+                <div class="absolute top-0 right-0 p-2 opacity-50">
+                    <i data-lucide="cpu" class="w-16 h-16 text-[#FCEE0A]/20"></i>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-8 relative z-10">
+                    <div>
+                        <div class="flex justify-between text-[#FCEE0A] mb-2 font-display tracking-wider">
+                            <span>CPU_LOAD</span>
+                            <span id="cpu-val" class="font-bold">0%</span>
+                        </div>
+                        <div class="h-4 bg-[#111] border border-gray-800 relative overflow-hidden">
+                            <div id="cpu-bar" class="h-full bg-[#FCEE0A] transition-all duration-300" style="width: 0%"></div>
+                            <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent_90%,#000_90%)] bg-[length:10%_100%] opacity-50"></div>
+                        </div>
                     </div>
-                    <button id="connection-toggle" class="relative inline-flex h-8 w-16 items-center rounded-full bg-green-600 transition-colors">
-                        <span id="toggle-slider" class="inline-block h-6 w-6 transform rounded-full bg-white transition-transform translate-x-9"></span>
+
+                    <div>
+                        <div class="flex justify-between text-[#00F0FF] mb-2 font-display tracking-wider">
+                            <span>MEMORY_ALLOC</span>
+                            <span id="ram-val" class="font-bold">0%</span>
+                        </div>
+                        <div class="h-4 bg-[#111] border border-gray-800 relative overflow-hidden">
+                            <div id="ram-bar" class="h-full bg-[#00F0FF] transition-all duration-300" style="width: 0%"></div>
+                            <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent_90%,#000_90%)] bg-[length:10%_100%] opacity-50"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs text-gray-500 font-mono text-center">
+                    SYSTEM RESOURCES MONITORING ACTIVE
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 cyber-card flex flex-col justify-between">
+                <h3 class="text-white font-display text-lg border-b border-gray-700 pb-2 mb-2">
+                    > GLOBAL_ACTIONS
+                </h3>
+                
+                <div class="flex flex-col gap-3">
+                    <button id="lock-all-btn" class="cyber-btn w-full text-xs flex items-center justify-center gap-2">
+                        <i data-lucide="lock"></i> LOCK ALL CLIENTS
+                    </button>
+                    
+                    <button id="kill-switch-btn" class="cyber-btn bg-transparent border border-[#FF003C] text-[#FF003C] hover:bg-[#FF003C] hover:text-black w-full text-xs flex items-center justify-center gap-2">
+                        <i data-lucide="skull"></i> EMERGENCY KILL SWITCH
                     </button>
                 </div>
-                <div class="flex items-center bg-black border border-gray-800 rounded p-4">
-                    <button id="disconnect-all-btn" class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors border border-red-500">
-                        <i data-lucide="power" class="w-5 h-5"></i> EMERGENCY SHUTDOWN
-                    </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
+            
+            <div class="cyber-card flex flex-col h-full min-h-0">
+                <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
+                    <h3 class="text-[#FCEE0A] font-display">SYSTEM_LOGS</h3>
+                    <button onclick="clearLogs()" class="text-xs text-gray-500 hover:text-white">[CLEAR]</button>
+                </div>
+                <div id="log-container" class="flex-1 overflow-y-auto font-mono text-xs space-y-1 p-2 bg-black/50 border border-gray-800">
+                    <div class="text-gray-500">Initializing NetWatch Protocol v2.77...</div>
+                    <div class="text-[#00F0FF]">Listening for incoming connections...</div>
                 </div>
             </div>
-        </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5">
-                <div class="flex justify-between mb-2"><span class="text-gray-400 text-sm">TOTAL CONNECTIONS</span><i data-lucide="users" class="w-4 h-4 text-blue-400"></i></div>
-                <div class="text-3xl font-bold text-blue-400" id="active-connections">0</div>
-            </div>
-
-            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5">
-                <div class="flex justify-between mb-2"><span class="text-gray-400 text-sm">CPU LOAD (SYSTEM)</span><i data-lucide="cpu" class="w-4 h-4 text-green-400"></i></div>
-                <div class="text-3xl font-bold text-green-400" id="cpu-percentage">0%</div>
-                <div class="w-full bg-gray-800 rounded-full h-2 mt-2"><div id="cpu-bar" class="bg-green-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div></div>
-            </div>
-
-            <div class="bg-gray-900 border border-gray-800 rounded-lg p-5">
-                <div class="flex justify-between mb-2"><span class="text-gray-400 text-sm">RAM USAGE (SYSTEM)</span><i data-lucide="memory-stick" class="w-4 h-4 text-cyan-400"></i></div>
-                <div class="flex items-baseline gap-2">
-                    <div class="text-3xl font-bold text-cyan-400" id="ram-percentage">0%</div>
-                    <div class="text-xs text-gray-500" id="ram-details">0 / 0 GB</div>
+            <div class="cyber-card flex flex-col h-full min-h-0">
+                <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
+                    <h3 class="text-[#00F0FF] font-display">ACTIVE_NODES</h3>
+                    <span id="client-count" class="bg-[#00F0FF]/10 text-[#00F0FF] px-2 py-1 text-xs">0 DETECTED</span>
                 </div>
-                <div class="w-full bg-gray-800 rounded-full h-2 mt-2"><div id="ram-bar" class="bg-cyan-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div></div>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden neon-border">
-                <div class="bg-black border-b border-gray-800 px-4 py-3 flex justify-between">
-                    <h3 class="text-green-400 font-bold flex items-center gap-2"><i data-lucide="terminal" class="w-4 h-4"></i> SYSTEM EVENTS LOG</h3>
-                    <button id="clear-logs-btn" class="text-gray-500 hover:text-gray-300 text-xs">[CLEAR]</button>
-                </div>
-                <div id="log-container" class="bg-black p-4 h-96 overflow-y-auto text-sm"></div>
-            </div>
-
-            <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden neon-border">
-                <div class="bg-black border-b border-gray-800 px-4 py-3 flex justify-between">
-                    <h3 class="text-green-400 font-bold flex items-center gap-2"><i data-lucide="monitor" class="w-4 h-4"></i> CONNECTED DEVICES</h3>
-                    <span class="text-gray-500 text-xs">MONITORING</span>
-                </div>
-                <div class="overflow-x-auto h-96">
-                    <table class="w-full text-sm" id="clients-table">
-                        <thead class="bg-black text-green-400 sticky top-0">
+                
+                <div class="flex-1 overflow-y-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-gray-500 text-xs uppercase bg-black/50 sticky top-0">
                             <tr>
-                                <th class="px-4 py-3 text-left">DEVICE NAME</th>
-                                <th class="px-4 py-3 text-left">IP ADDRESS</th>
-                                <th class="px-4 py-3 text-left">STATUS</th>
+                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">NAME</th>
+                                <th class="px-4 py-2 text-right">STATUS</th>
                             </tr>
                         </thead>
                         <tbody id="clients-tbody" class="divide-y divide-gray-800">
-                            <tr><td colspan="3" class="text-center py-8 text-gray-600 italic">Waiting for connections...</td></tr>
+                            <tr>
+                                <td colspan="3" class="px-4 py-8 text-center text-gray-600 italic">
+                                    Scanning network for signals...
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-gray-800 p-2 text-center text-[10px] text-gray-600 font-mono">
+        SECURE CONNECTION ENCRYPTED // NET_WATCH CORP © 2077
+    </footer>
 
     <script>
+        // Init Lucide Icons
         lucide.createIcons();
-        document.getElementById('server-ip').innerText = window.location.hostname;
 
-        let isSystemLocked = false;
-        let myConnectionId = "";
+        // Update Uptime
+        let seconds = 0;
+        setInterval(() => {
+            seconds++;
+            const date = new Date(0);
+            date.setSeconds(seconds);
+            document.getElementById('uptime-counter').innerText = date.toISOString().substr(11, 8);
+        }, 1000);
 
+        // SignalR Connection
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/systemHub")
             .withAutomaticReconnect()
             .build();
 
-        connection.on("ReceiveLog", (msg) => {
-            let level = "INFO";
-            if (msg.includes("STOPPED") || msg.includes("BLOCKED") || msg.includes("Disconnected")) level = "WARN";
-            if (msg.includes("New connection")) level = "NET";
-            if (msg.includes("LOCKED")) level = "SEC";
-            addLog(level, msg);
-        });
-
-        connection.on("UpdateClientList", (listIDs) => {
-            document.getElementById("active-connections").innerText = listIDs.length;
-            updateClientTableReal(listIDs);
-        });
-
-        connection.on("UpdateSystemStatus", (isLocked) => {
-            isSystemLocked = isLocked;
-            updateToggleUI(isLocked);
-        });
-
-        // 4. HỨNG DỮ LIỆU THẬT TỪ SERVER (NEW)
-        connection.on("ReceiveSystemStats", (stats) => {
-            // stats = { cpu: 12.5, ramUsed: 4096, ramTotal: 16384 }
-
-            // Update CPU
-            const cpuVal = stats.cpu + "%";
-            document.getElementById('cpu-percentage').innerText = cpuVal;
-            document.getElementById('cpu-bar').style.width = cpuVal;
-
-            // Update RAM
-            const ramPercent = Math.round((stats.ramUsed / stats.ramTotal) * 100);
-            document.getElementById('ram-percentage').innerText = ramPercent + "%";
-            document.getElementById('ram-bar').style.width = ramPercent + "%";
-
-            // Chi tiết RAM (GB)
-            const usedGB = (stats.ramUsed / 1024).toFixed(1);
-            const totalGB = (stats.ramTotal / 1024).toFixed(0);
-            document.getElementById('ram-details').innerText = `${usedGB} / ${totalGB} GB`;
-        });
-
-        connection.on("ReceiveScreenshot", () => addLog("DATA", "📸 Received Screenshot data"));
-        connection.on("ReceiveProcessList", () => addLog("DATA", "📋 Process List generated"));
-
-        const toggleBtn = document.getElementById('connection-toggle');
-        const toggleSlider = document.getElementById('toggle-slider');
-
-        function updateToggleUI(locked) {
-            if (!locked) {
-                toggleBtn.classList.replace('bg-gray-600', 'bg-green-600');
-                toggleSlider.classList.replace('translate-x-1', 'translate-x-9');
-            } else {
-                toggleBtn.classList.replace('bg-green-600', 'bg-gray-600');
-                toggleSlider.classList.replace('translate-x-9', 'translate-x-1');
-            }
-        }
-
-        toggleBtn.addEventListener('click', async () => {
-            const newState = !isSystemLocked;
-            try { await connection.invoke("ToggleSystemLock", newState); }
-            catch (err) { addLog("ERR", "Lỗi gửi lệnh khóa: " + err.toString()); }
-        });
-
-        function addLog(level, message) {
-            const logContainer = document.getElementById('log-container');
+        // 1. Receive Log
+        connection.on("ReceiveLog", (message) => {
+            const container = document.getElementById("log-container");
+            const div = document.createElement("div");
             const time = new Date().toLocaleTimeString();
-            const colors = { 'INFO': 'text-green-400', 'WARN': 'text-yellow-400', 'ERR': 'text-red-400', 'CMD': 'text-cyan-400', 'NET': 'text-blue-400', 'SEC': 'text-purple-400' };
-            const div = document.createElement('div');
-            div.className = 'log-entry text-gray-400 border-b border-gray-800 py-1';
-            div.innerHTML = `[${time}] <span class="${colors[level] || 'text-white'} font-bold">${level}</span> | ${message}`;
-            logContainer.appendChild(div);
-            logContainer.scrollTop = logContainer.scrollHeight;
-        }
+            
+            // Color coding for logs
+            let colorClass = "text-gray-300";
+            if (message.includes("Error") || message.includes("Disconnected")) colorClass = "text-[#FF003C]";
+            else if (message.includes("Connected")) colorClass = "text-[#00F0FF]";
+            else if (message.includes("Command")) colorClass = "text-[#FCEE0A]";
 
-        function updateClientTableReal(clients) {
+            div.innerHTML = `<span class="text-gray-600">[${time}]</span> <span class="${colorClass}">${message}</span>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight; // Auto scroll
+        });
+
+        // 2. Update Client List
+        connection.on("UpdateClientList", (clients) => {
+            document.getElementById("client-count").innerText = `${clients.length} DETECTED`;
             const tbody = document.getElementById("clients-tbody");
-            if (!tbody) return;
             tbody.innerHTML = "";
 
-            if (!clients || clients.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="text-center py-8 text-gray-600 italic">No active connections</td></tr>`;
+            if (clients.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="px-4 py-8 text-center text-gray-600 italic">No active signals...</td></tr>`;
                 return;
             }
 
             clients.forEach(client => {
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-gray-800 transition-colors border-b border-gray-800";
-                const isMe = (client.connectionId === myConnectionId);
-                const iconColor = isMe ? "text-purple-400" : "text-blue-400";
-                const rowClass = isMe ? "font-bold text-purple-300" : "text-gray-300";
-                const displayIP = client.ipAddress || "Unknown";
-
+                tr.className = "hover:bg-[#FCEE0A]/10 transition-colors cursor-default";
                 tr.innerHTML = `
-                        <td class="px-4 py-3 ${rowClass} flex items-center gap-2">
-                            <i data-lucide="monitor" class="w-4 h-4 ${iconColor}"></i>
-                            ${client.name} ${isMe ? "(YOU)" : ""}
-                        </td>
-                        <td class="px-4 py-3 text-gray-500 font-mono">${displayIP}</td>
-                        <td class="px-4 py-3">
-                            <span class="text-green-400 text-xs flex items-center gap-1">
-                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                Online
-                            </span>
-                        </td>
-                    `;
+                    <td class="px-4 py-2 font-mono text-[#FCEE0A]">${client.id.substring(0,8)}...</td>
+                    <td class="px-4 py-2 text-white flex items-center gap-2">
+                        <i data-lucide="monitor" class="w-4 h-4 text-gray-500"></i> ${client.name}
+                    </td>
+                    <td class="px-4 py-2 text-right">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse"></span>
+                    </td>
+                `;
                 tbody.appendChild(tr);
             });
-            if (window.lucide) lucide.createIcons();
-        }
+            lucide.createIcons();
+        });
 
-        async function startApp() {
+        // 3. Receive Stats
+        connection.on("ReceiveSystemStats", (stats) => {
+            // Update CPU
+            document.getElementById("cpu-val").innerText = stats.cpu + "%";
+            document.getElementById("cpu-bar").style.width = stats.cpu + "%";
+            
+            // Update RAM
+            const ramPercent = Math.round((stats.ramUsed / stats.ramTotal) * 100);
+            document.getElementById("ram-val").innerText = ramPercent + "%";
+            document.getElementById("ram-bar").style.width = ramPercent + "%";
+        });
+
+        // Start Connection
+        async function start() {
             try {
                 await connection.start();
-                myConnectionId = connection.connectionId;
-                const indicator = document.getElementById("status-indicator");
-                const statusText = document.getElementById("server-status");
-                indicator.classList.remove("bg-red-500");
-                indicator.classList.add("bg-green-500", "status-pulse");
-                statusText.innerText = "ONLINE";
-                statusText.classList.replace("text-gray-400", "text-green-400");
-                addLog("INFO", "Monitor Connected. My ID: " + myConnectionId);
+                console.log("SignalR Connected.");
+                document.getElementById('server-ip').innerText = window.location.hostname;
+                // Ask for initial state
+                await connection.invoke("GetAgents"); 
             } catch (err) {
                 console.error(err);
-                setTimeout(startApp, 5000);
+                setTimeout(start, 5000);
             }
         }
 
-        // XÓA ĐOẠN FAKE STATS CŨ
-        // setInterval(...) => Đã xóa
-
-        document.getElementById('clear-logs-btn').addEventListener('click', () => {
-            document.getElementById('log-container').innerHTML = '';
-        });
-
-        document.getElementById('disconnect-all-btn').addEventListener('click', async () => {
-            if (confirm("Dừng Server ngay lập tức?")) {
-                try { await connection.invoke("EmergencyShutdown"); } catch (e) { console.error(e); }
+        // Button Actions
+        document.getElementById('lock-all-btn').addEventListener('click', async () => {
+            if(confirm("EXECUTE PROTOCOL: LOCK ALL STATIONS?")) {
+                await connection.invoke("BroadcastCommand", "lock");
             }
         });
 
-        startApp();
+        document.getElementById('kill-switch-btn').addEventListener('click', async () => {
+            if(confirm("⚠ WARNING: EMERGENCY SHUTDOWN ALL CLIENTS?")) {
+                await connection.invoke("BroadcastCommand", "shutdown");
+            }
+        });
+
+        function clearLogs() {
+            document.getElementById("log-container").innerHTML = "";
+        }
+
+        start();
     </script>
 </body>
 </html>
