@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IpAgent")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9227796bb3728c426c565923bb14c5ba3b4c733c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30d07725d9630ab0897a4d7035237843733c2729")]
 [assembly: System.Reflection.AssemblyProductAttribute("IpAgent")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IpAgent")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

